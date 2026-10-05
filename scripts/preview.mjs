@@ -42,7 +42,7 @@ for (const src of files) {
     const depth = rp.split('/').length - 1, rel = depth ? '../'.repeat(depth) : './';
     let h = readFileSync(src, 'utf8');
     h = h.replace(/(src|href)="\/(_next|fonts|email)\//g, `$1="${rel}$2/`)
-         .replace(/(src|href)="\/(logo-wordmark-gold|logo-wordmark-white|mark-gold|icon)\.svg/g, `$1="${rel}$2.svg`)
+         .replace(/(src|href)="\/(logo-wordmark-gold|logo-wordmark-white|mark-gold|icon)\.svg/g, `$1="${rel}$2.svg`).replace(/src="\/kyu\.webp"/g, `src="${rel}kyu.webp"`)
          // Chunk and stylesheet references inside the inline page data must match the rewritten tags exactly.
          .replace(/\\"\/_next\/static\//g, `\\"${rel}_next/static/`)
          .replace('<head>', '<head>' + shim(rel))
