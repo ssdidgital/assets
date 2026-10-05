@@ -34,7 +34,7 @@ export function V2Hero() {
   );
 }
 
-export function V2Router() {
+export function V2Router({ n = '01' }: { n?: string }) {
   const items: [IconName, string, string, string][] = [
     ['search', 'How we think ↓', 'The problem we see most often in founder-led businesses, and why more leads rarely fix it.', '#diagnosis'],
     ['workflow', 'How we work →', 'What we build, how an engagement runs, and what you keep at the end.', '/approach'],
@@ -42,7 +42,7 @@ export function V2Router() {
   ];
   return (
     <section className="s-sec"><div className="s-wrap s-center">
-      <SecIndex n="01">Start here</SecIndex>
+      <SecIndex n={n}>Start here</SecIndex>
       <h2 className="s-h2" style={{ marginTop: 0 }}>What brings you by?</h2>
       <div className="s-strip">{items.map(([i, t, d, to]) => (
         <Link key={t} href={to}>
@@ -55,10 +55,10 @@ export function V2Router() {
   );
 }
 
-export function V2Diagnosis() {
+export function V2Diagnosis({ n = '02' }: { n?: string }) {
   return (
     <section className="s-sec s-sunk" id="diagnosis"><div className="s-wrap">
-      <SecIndex n="02">What the CRM won’t tell you</SecIndex>
+      <SecIndex n={n}>What the CRM won’t tell you</SecIndex>
       <h2 className="s-h2 v2-h v2-h-wide">Most businesses think they need more leads. <Em><br />They’re leaking the ones they have.</Em></h2>
       <div className="v2-split v2-offset">
         <div aria-hidden="true" />
@@ -78,7 +78,7 @@ export function V2Diagnosis() {
   );
 }
 
-export function V2Build() {
+export function V2Build({ n = '03', diagram = true }: { n?: string; diagram?: boolean }) {
   const rows: [IconName, string, string, string?][] = [
     ['target', 'Acquisition.', 'A front end that brings in the right people: the message, the funnel and the path from first click to booked call.'],
     ['repeat', 'Conversion.', "Fast, consistent follow-up that turns this week’s enquiries into booked, qualified calls."],
@@ -87,7 +87,7 @@ export function V2Build() {
   ];
   return (
     <section className="s-sec"><div className="s-wrap">
-      <SecIndex n="03">What we build</SecIndex>
+      <SecIndex n={n}>What we build</SecIndex>
       <div className="v2-split">
         <div className="v2-sticky">
           <h2 className="s-h2 v2-h">Four stages of revenue.<br />We start <Em>where the leak is&nbsp;biggest.</Em></h2>
@@ -104,17 +104,17 @@ export function V2Build() {
           </div>
         ))}</div>
       </div>
-      <SystemDiagram />
+      {diagram ? <SystemDiagram /> : null}
     </div></section>
   );
 }
 
-export function V2How() {
+export function V2How({ n = '04', theme = 'forest' }: { n?: string; theme?: 'forest' | 'linen' }) {
   return (
-    <section data-theme="forest" className="v2-forest">
+    <section data-theme={theme} className={theme === 'forest' ? 'v2-forest' : 'v2-linen'}>
       <div className="s-frame">
         <div className="s-sec" id="how"><div className="s-wrap s-center">
-          <SecIndex n="04">How we work</SecIndex>
+          <SecIndex n={n}>How we work</SecIndex>
           <h2 className="s-h2" style={{ marginTop: 0 }}>Diagnose. Install. <Em>Hand over.</Em></h2>
           <div className="s-steps"><FeatureCards items={[
             { label: 'First', icon: 'search', title: 'Diagnose.', text: "We map how revenue moves through your business today, from first enquiry to repeat client. Before we build anything, you’ll know where the biggest constraint sits and what we’d fix first." },
@@ -131,12 +131,12 @@ export function V2How() {
   );
 }
 
-export function V2Fit() {
+export function V2Fit({ n = '06' }: { n?: string }) {
   const good = ['You sell a premium service or programme, and buyers usually take a call before they commit.', "You have a list of past leads, enquiries or clients that you’ve paid to build.", 'Revenue is consistent, but growth still runs through you.', 'You want a system you keep.'];
   const not = ["You’re still finding your offer or your first clients.", "You’re looking for cheap leads or a quick campaign.", "You’d rather not look at the numbers."];
   return (
     <section className="s-sec"><div className="s-wrap s-center">
-      <SecIndex n="06">Who it’s for</SecIndex>
+      <SecIndex n={n}>Who it’s for</SecIndex>
       <h2 className="s-h2" style={{ marginTop: 0, maxWidth: 900 }}>Built for founder-led businesses that have <Em>proven their model.</Em></h2>
       <div className="s-fit">
         <div><h3 className="ss-h3" style={{ margin: 0 }}>A good fit if:</h3><ul className="s-list ss-body">{good.map((g) => <li key={g}><Icon name="check" size={20} /><span>{g}</span></li>)}</ul></div>
@@ -146,10 +146,10 @@ export function V2Fit() {
   );
 }
 
-export function V2Founder() {
+export function V2Founder({ n = '07' }: { n?: string }) {
   return (
     <section className="s-sec s-sunk"><div className="s-wrap">
-      <SecIndex n="07">The founder</SecIndex>
+      <SecIndex n={n}>The founder</SecIndex>
       <div className="s-founder">
         <div className="s-portrait"><span className="ss-label">Portrait — 4:5, professional</span></div>
         <div className="s-founder-text">
@@ -163,10 +163,10 @@ export function V2Founder() {
   );
 }
 
-export function V2Faq() {
+export function V2Faq({ n = '08' }: { n?: string }) {
   return (
     <section className="s-sec"><div className="s-wrap">
-      <SecIndex n="08">Before you book</SecIndex>
+      <SecIndex n={n}>Before you book</SecIndex>
       <div className="s-faqwrap">
         <div className="s-faq-head">
           <h2 className="s-h2 s-faq-h" style={{ marginTop: 0 }}>What to expect from <Em>a systems audit.</Em></h2>
@@ -184,11 +184,11 @@ export function V2Faq() {
 }
 
 // Proof slot: the best numbers and a named quote, from lib/work.ts. Placeholders until real results are in.
-export function V2Proof() {
+export function V2Proof({ n = '05' }: { n?: string }) {
   const c = CASE_STUDIES[0];
   return (
     <section className="s-sec s-sunk"><div className="s-wrap">
-      <SecIndex n="05">Results</SecIndex>
+      <SecIndex n={n}>Results</SecIndex>
       <div className="v2-split">
         <div className="v2-proof-head">
           <h2 className="s-h2 v2-h">What the system <Em>brought back.</Em></h2>

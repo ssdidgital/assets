@@ -1,0 +1,89 @@
+/* Homepage directions v3 (/v3) and v4 (/v4). Built on the v2 styles; scoped to .s-v3 / .s-v4. */
+
+/* ── v3 · the board in the hero ───────────────────────────────────────────── */
+.s-v3 .s-hero { padding: calc(var(--v2-head) + 120px) 0 112px; }
+.v3-hero-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-12) var(--space-16); align-items: center; }
+.v3-h { grid-column: 1 / -1; text-align: left; justify-self: start; }
+.v3-copy { display: grid; justify-items: start; text-align: left; }
+.s-v3 .v3-pos { margin: 0; text-align: left; max-width: 440px; }
+.v3-steps { list-style: none; margin: var(--space-8) 0 0; padding: 0; width: 100%; max-width: 440px; border-top: 1px solid var(--border-strong); }
+.v3-steps li { display: flex; gap: var(--space-3); align-items: baseline; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-strong); font: 500 16px/1.35 var(--font-sans); }
+.v3-steps .s-qn { margin: 0; }
+.s-v3 .v3-ctas { justify-content: flex-start; margin-top: var(--space-8); }
+
+.v3-board { position: relative; margin: 0; container-type: inline-size; aspect-ratio: 560 / 460; border: 1px solid var(--border-strong); background-color: var(--bg-sunken); background-image: radial-gradient(var(--border-strong) 1px, transparent 1.4px); background-size: 16px 16px; background-position: 8px 8px; }
+.v3-board > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.v3-board .v2-board-frame { left: 14px; top: 12px; }
+.v3-tag { position: absolute; transform: translateY(-50%); font: 500 max(9px, 1.8cqi)/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text-secondary); }
+.v3-tag.is-on { color: var(--text-primary); }
+.v3n { position: absolute; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; padding: 0 3.2cqi; border: 1px solid var(--border-strong); background: var(--bg-raised); font: 500 max(11px, 2.5cqi)/1.3 var(--font-sans); letter-spacing: -.005em; color: var(--text-primary); }
+.v3n .bn-k { font-size: max(8.5px, 1.75cqi); margin-bottom: .5em; }
+.v3n-wait { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2cqi; align-content: center; align-items: start; border-color: var(--text-primary); }
+.v3n-wait .v2-sw { width: 2.6cqi; height: 2.6cqi; min-width: 11px; min-height: 11px; margin-top: .25em; }
+.v3n-wait strong { display: block; font-weight: 600; font-size: max(12px, 2.8cqi); }
+.v3n-wait span:not(.v2-sw) { display: block; margin-top: .25em; font-weight: 400; color: var(--text-secondary); font-size: max(10.5px, 2.2cqi); }
+.v3n-quiet { border-style: dashed; background: transparent; color: var(--text-secondary); font-weight: 400; }
+.v3n-leak { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--on-accent); }
+.v3n-note { background: var(--tint-accent); border-color: transparent; font-weight: 400; font-size: max(10.5px, 2.2cqi); }
+.v3n-note .bn-k { color: var(--text-secondary); }
+.v3n-step { border-color: var(--text-primary); }
+.v3n-now { background: var(--text-primary); border-color: var(--text-primary); color: var(--bg-canvas); }
+.v3n-sel { outline: 1px solid var(--focus); outline-offset: 5px; }
+.v3n-sel .h { position: absolute; width: 7px; height: 7px; background: var(--bg-raised); border: 1px solid var(--focus); }
+.v3n-sel .tl { left: -9px; top: -9px; } .v3n-sel .tr { right: -9px; top: -9px; } .v3n-sel .bl { left: -9px; bottom: -9px; } .v3n-sel .br { right: -9px; bottom: -9px; }
+.v3n-sel .bn-sel-tag { left: -6px; bottom: calc(100% + 10px); font-size: max(8.5px, 1.6cqi); }
+/* The hero isn’t scroll-revealed, so the board plays once on load: connectors draw, then the cursor arrives. */
+.v3-board .bp-on { animation: v3-draw 1s cubic-bezier(.6, 0, .2, 1) .5s both; }
+.v3-cursor { animation: v3-cursor 1.1s cubic-bezier(.2, .7, .2, 1) 1.5s both; }
+@keyframes v3-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes v3-cursor { from { transform: translate(18cqi, 10cqi); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .v3-board .bp-on, .v3-cursor { animation: none; } }
+/* The board lives in the hero on wide screens, so the full diagram under “What we build” shows only on narrow ones. */
+@media (min-width: 901px) { .s-v3 .v2-sys { display: none; } }
+@media (max-width: 900px) {
+  .v3-hero-in { grid-template-columns: 1fr; gap: var(--space-8); }
+  .v3-board { display: none; }
+  .s-v3 .v3-pos, .v3-steps { max-width: none; }
+}
+@media (max-width: 767px) { .s-v3 .s-hero { padding: calc(var(--v2-head) + 64px) 0 72px; } }
+
+/* ── v4 · Forest hero that leads with the leak ────────────────────────────── */
+body:has(.s-v4) .s-head { margin-bottom: 0; background: var(--bg-canvas); border-bottom-color: var(--border-subtle); }
+.v4-hero { background: var(--bg-canvas); }
+.s-v4 .v4-hero-sec { padding: 120px 0 104px; border-bottom: 0; background: none; }
+.v4-h { text-align: left; }
+.v4-row { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--space-16); align-items: start; margin-top: var(--space-12); }
+.s-v4 .v4-pos { margin: 0; text-align: left; max-width: 520px; }
+.s-v4 .v4-ctas { justify-content: flex-start; margin-top: var(--space-8); }
+.v4-steps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border-strong); }
+.v4-steps li { display: flex; gap: var(--space-3); align-items: baseline; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-strong); font: 500 17px/1.35 var(--font-sans); color: var(--text-primary); }
+.v4-steps .s-qn { margin: 0; }
+/* Gold primary on Forest, as the original handoff described for the hero. The switch keeps contrast against it. */
+.v4-hero .ss-btn-primary { background: var(--accent-fill); color: var(--on-accent); border-color: var(--accent-fill); }
+.v4-hero .ss-btn-primary:hover { background: var(--gold-200); border-color: var(--gold-200); }
+.s .v4-hero .s-blink .ss-btn-switch { background: var(--forest-900); }
+.s .v4-hero .s-blink .ss-btn-switch::before { background: var(--linen); }
+.s-v4 .v4-leak { max-width: none; margin-top: var(--space-16); padding: 0; background: none; border: 0; justify-items: stretch; }
+.v4-leak-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-6); }
+.v4-leak-head .ss-label { color: var(--text-secondary); }
+.v4-try { font: 500 15px/1 var(--font-sans); color: var(--accent-text) !important; text-decoration: none; }
+.v4-try:hover { text-decoration: underline; text-underline-offset: 4px; }
+.v4-leak .s-bar-wrap { margin-top: 0; }
+.v4-leak .s-key-i strong { color: var(--text-primary); }
+.v4-fig { margin: var(--space-12) 0 0; font: 600 clamp(26px, 2.8vw, 40px)/1.12 var(--font-sans); letter-spacing: -.03em; color: var(--text-primary); text-wrap: balance; font-variant-numeric: tabular-nums; }
+@media (max-width: 900px) { .v4-row { grid-template-columns: 1fr; gap: var(--space-8); } }
+@media (max-width: 767px) {
+  .s-v4 .v4-hero-sec { padding: 64px 0 64px; }
+  .s-v4 .v4-leak { margin-top: var(--space-12); }
+  .s-v4 .v4-leak .s-key { grid-template-columns: 1fr !important; }
+  .v4-steps li { font-size: 16px; }
+}
+.v3-board .bp-stem { fill: none; stroke: var(--text-secondary); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.v3-tag { font-size: max(8.5px, 1.6cqi); }
+/* figure has a default 40px side margin. */
+.s-v4 .v4-leak { margin: var(--space-16) 0 0; }
+/* Left-aligned heroes on phones: full-width primary button, link aligned with the text. */
+@media (max-width: 767px) {
+  .s-v3 .v3-ctas, .s-v4 .v4-ctas { width: 100%; align-items: stretch; }
+  .s-v3 .v3-ctas .ss-btn-ghost, .s-v4 .v4-ctas .ss-btn-ghost { align-self: flex-start; width: auto; }
+}
