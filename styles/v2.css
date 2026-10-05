@@ -1,0 +1,100 @@
+/* Homepage v2 (/v2): design exploration for comparison. Everything is scoped to .s-v2 or to pages that contain it. */
+
+:root { --v2-head: 88px; }
+@media (max-width: 767px) { :root { --v2-head: 64px; } }
+
+/* 7 · Header sits transparent over the hero dot grid; its fill and hairline arrive once you scroll. */
+body:has(.s-v2) .s-head { margin-bottom: calc(-1 * var(--v2-head)); background: transparent; border-bottom-color: transparent; transition: background-color .25s ease, border-color .25s ease; }
+body:has(.s-v2) .s-head[data-scrolled] { background: var(--bg-canvas); border-bottom-color: var(--border-subtle); }
+
+/* 8 · More room around the big moments. */
+.s-v2 .s-hero { padding: calc(var(--v2-head) + 176px) 0 176px; }
+@media (max-width: 767px) { .s-v2 .s-hero { padding: calc(var(--v2-head) + 88px) 0 88px; } }
+
+/* 6 · Optical tracking steps and tabular figures. */
+.s-v2 .ss-h3, .s-v2 .s-strip h3, .s-v2 .ss-cards-title { letter-spacing: -.01em; }
+.s-v2 .ss-body-lg, .s-v2 .s-lede-b { letter-spacing: -.005em; }
+.s-v2 .s-faq-i button { letter-spacing: -.01em; }
+.s-v2 .ss-label, .s-v2 .s-qn, .v2-idx { font-variant-numeric: tabular-nums; }
+
+/* 5 · Mono section index in place of the boxed eyebrow. */
+.v2-idx { display: flex; align-items: center; gap: var(--space-3); justify-self: stretch; width: 100%; margin-bottom: var(--space-12); font: 500 12px/1 var(--font-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--text-secondary); text-align: left; }
+.v2-idx-n { color: var(--accent-text); }
+.v2-idx-dash { color: var(--border-strong); letter-spacing: 0; }
+.v2-idx::after { content: ""; flex: 1; height: 1px; background: var(--border-strong); margin-left: var(--space-3); }
+
+/* 1 · Split layouts: heading left, reading column right. */
+.v2-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-16); align-items: start; text-align: left; }
+.s-v2 .v2-h { margin: 0; max-width: none; text-align: left; }
+.s-v2 .v2-read { margin-top: 0; max-width: 620px; padding-top: 6px; }
+.s-v2 .v2-split + .s-illo { max-width: none; margin-top: var(--space-16); }
+.v2-close { margin-top: var(--space-24); padding-top: var(--space-12); border-top: 1px solid var(--border-strong); align-items: end; }
+.v2-statement { margin: 0; font: 600 clamp(32px, 3.4vw, 48px)/1.05 var(--font-sans); letter-spacing: -.035em; text-wrap: balance; color: var(--text-primary); }
+.v2-sticky { position: sticky; top: 120px; display: grid; gap: var(--space-8); }
+.v2-after { margin: 0; color: var(--text-secondary); max-width: 440px; text-wrap: pretty; }
+.s-v2 .v2-rows { margin-top: 0; max-width: none; }
+.s-v2 .s-founder { gap: var(--space-16); }
+.s-v2 .s-faqwrap .s-faq-h { margin-top: 0; }
+@media (max-width: 900px) {
+  .v2-split { grid-template-columns: 1fr; gap: var(--space-8); }
+  .v2-sticky { position: static; }
+  .v2-close { align-items: start; }
+}
+@media (max-width: 767px) {
+  .v2-idx { margin-bottom: var(--space-8); letter-spacing: .14em; }
+  .v2-close { margin-top: var(--space-16); padding-top: var(--space-8); }
+  .s-v2 .v2-split + .s-illo { margin-top: var(--space-12); }
+}
+
+/* 2 · Forest band mid-page. The frame lines carry through in Forest's own hairline colour. */
+.v2-forest { background: var(--bg-canvas); }
+.v2-forest .s-sec { padding: 120px 0; }
+.v2-forest .s-keep .s-tile { background: var(--bg-sunken); }
+.v2-forest .ss-cards-tile { background: var(--accent-fill); color: var(--on-accent); }
+@media (max-width: 767px) { .v2-forest .s-sec { padding: 72px 0; } }
+
+/* 4 · The system diagram. Ink = buying, hatched = waiting, gold = bought elsewhere (same code as the illustration). */
+.v2-sys { margin: var(--space-24) 0 0; padding: var(--space-12); background: var(--bg-raised); border: 1px solid var(--border-subtle); }
+.v2-sys-head { display: grid; justify-items: center; text-align: center; gap: var(--space-3); margin-bottom: var(--space-12); }
+.v2-sys-head .ss-h3 { margin: 0; }
+.v2-sys-k { color: var(--text-secondary); }
+.v2-sys-body { display: grid; justify-items: center; }
+.v2-node { box-sizing: border-box; width: 100%; max-width: 320px; padding: var(--space-4) var(--space-6); border: 1px solid var(--text-primary); font: 500 15px/1.4 var(--font-sans); text-align: left; background: var(--bg-raised); }
+.v2-node strong { display: block; font: 600 16px/22px var(--font-sans); }
+.v2-node p { margin: var(--space-1) 0 0; font: 400 14px/21px var(--font-sans); color: var(--text-secondary); }
+.v2-sys-in { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: var(--space-3); align-items: start; max-width: 380px; }
+.v2-node-quiet { border-style: dashed; border-color: var(--border-strong); color: var(--text-secondary); font-weight: 400; }
+.v2-node-leak { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--on-accent); }
+.v2-node-step { display: grid; gap: 6px; }
+.v2-step-n { font: 500 11px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-text); }
+.v2-node-now { background: var(--text-primary); border-color: var(--text-primary); color: var(--bg-canvas); }
+/* Fork: a stub down from the input, then a rule across to the centre of each lane. Lanes have no gap, so centres sit at 25% and 75%. */
+.v2-fork { position: relative; width: 100%; height: 32px; }
+.v2-fork::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: var(--text-primary); }
+.v2-fork::after { content: ""; position: absolute; left: 25%; right: 25%; bottom: 0; height: 1px; background: var(--text-primary); }
+.v2-lanes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+.v2-lane { display: grid; justify-items: center; align-content: start; padding: 0 var(--space-6); }
+.v2-lane::before { content: ""; width: 1px; height: 24px; background: var(--text-primary); }
+.v2-lane-off::before { background: var(--border-strong); }
+.v2-lane-k { margin: var(--space-3) 0 var(--space-4); color: var(--text-secondary); }
+.v2-lane-on .v2-lane-k { color: var(--text-primary); }
+.v2-down { position: relative; width: 1px; height: 32px; background: currentColor; color: var(--text-primary); }
+.v2-down::after { content: ""; position: absolute; left: -4px; bottom: 1px; width: 7px; height: 7px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg); }
+.v2-lane-off .v2-down { color: var(--border-strong); }
+.v2-sw { display: inline-block; width: 16px; height: 16px; flex: none; box-sizing: border-box; margin-top: 3px; }
+.v2-sw-now { background: var(--text-primary); }
+.v2-sw-wait { background-color: var(--bg-canvas); background-image: repeating-linear-gradient(135deg, var(--accent-text) 0 1px, transparent 1px 7px); border: 1px solid var(--text-primary); }
+.v2-sw-leak { background: var(--accent-fill); }
+.v2-legend { list-style: none; margin: var(--space-12) 0 0; padding: var(--space-6) 0 0; border-top: 1px solid var(--border-subtle); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3) var(--space-8); font: 400 14px/21px var(--font-sans); color: var(--text-secondary); }
+.v2-legend li { display: flex; gap: var(--space-2); align-items: center; }
+.v2-legend .v2-sw { margin-top: 0; }
+@media (max-width: 767px) {
+  .v2-sys { margin-top: var(--space-16); padding: var(--space-8) var(--space-4); }
+  .v2-fork { display: none; }
+  .v2-lanes { grid-template-columns: 1fr; gap: var(--space-8); }
+  .v2-lane { padding: 0; }
+  .v2-legend { justify-content: flex-start; flex-direction: column; }
+}
+
+/* The portrait placeholder disappears on the sunken founder section; lift it to the canvas tone. */
+.s-v2 .s-sunk .s-portrait { background: var(--bg-canvas); }
