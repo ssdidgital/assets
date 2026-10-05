@@ -13,7 +13,7 @@ export default function About() {
       <section className="s-sec s-sec-first s-phero"><div className="s-wrap s-center">
         <Eyebrow>About</Eyebrow>
         <h1 className="s-h1">The sales I watched slip away <Em>weren’t lost on the call.</Em></h1>
-        <div className="s-portrait s-portrait-lg s-portrait-img"><img src="/kyu.webp" width={1200} height={1500} alt="Kyū, founder of System Switch" loading="lazy" decoding="async" /></div>
+        <div className="s-portrait s-portrait-lg s-portrait-img"><img src="/kyu.webp" width={1200} height={1500} alt="Kyū, founder of System Switch" loading="lazy" decoding="async" /><span className="s-portrait-tick tl" aria-hidden="true" /><span className="s-portrait-tick br" aria-hidden="true" /><span className="s-portrait-tag" aria-hidden="true"><i />Kyū · Founder</span></div>
       </div></section>
       <section className="s-sec"><div className="s-wrap s-center">
         <div className="s-story ss-body-lg">

@@ -131,7 +131,7 @@ export function V2Founder({ n = '06' }: { n?: string }) {
     <section className="s-sec s-sunk"><div className="s-wrap">
       <SecIndex n={n}>The founder</SecIndex>
       <div className="s-founder">
-        <div className="s-portrait s-portrait-img"><img src="/kyu.webp" width={1200} height={1500} alt="Kyū, founder of System Switch" loading="lazy" decoding="async" /></div>
+        <div className="s-portrait s-portrait-img"><img src="/kyu.webp" width={1200} height={1500} alt="Kyū, founder of System Switch" loading="lazy" decoding="async" /><span className="s-portrait-tick tl" aria-hidden="true" /><span className="s-portrait-tick br" aria-hidden="true" /><span className="s-portrait-tag" aria-hidden="true"><i />Kyū · Founder</span></div>
         <div className="s-founder-text">
           <h2 className="s-h2" style={{ marginTop: 0 }}>Why <Em>System Switch</Em> exists.</h2>
           <p className="ss-body">Kyū spent six years closing high-ticket deals: <strong><Ph>[[X,XXX+]]</Ph></strong> calls and <strong><Ph>[[<Cur />X]]</Ph></strong> closed. He kept seeing the same buyers slip away after the call. Before that, he’d lost a business of his own, for a reason most founders don’t see coming.</p>
