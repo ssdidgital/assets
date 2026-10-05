@@ -23,7 +23,7 @@ export default function About() {
           <p>System Switch is what came out of both of those lessons. We build the infrastructure that holds a buyer between “interested” and “ready”, and puts them back on your sales team’s calendar. We build it inside your business, around your offer and your voice, and run it until it’s producing booked calls. Then we hand you the controls, and you keep what we build.</p>
           <p>Most agencies start with traffic. We start with the money a business has already earned and never collected, because that’s what you see from the closer’s seat. And because the firm was built from that seat, we don’t hand over a system and leave the sales side to chance. Everything we build is shaped by what actually happens on a call: what a buyer needs to hear before they’re ready, what your sales team needs going in, and where deals tend to stall.</p>
           <p className="s-story-end">If that sounds like your business, start with a systems audit.</p>
-          <div><BookButton /></div>
+          <div><BookButton placement="about" /></div>
         </div>
       </div></section>
     </SitePage>

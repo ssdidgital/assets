@@ -5,6 +5,7 @@ import { setCurrency, useCurrency } from '@/lib/currency';
 import { leak, LEAK_DEFAULTS, money, saveLeak, type Currency, type LeakInputs } from '@/lib/leak';
 import { Button } from '../Button';
 import { Em } from '../Text';
+import { bookHref } from '@/lib/links';
 
 type SliderProps = { id: string; label: string; help?: string; min: number; max: number; step: number; value: number; text: string; lo?: string; hi?: string; onChange: (v: number) => void };
 
@@ -80,7 +81,7 @@ export function LeakCalculator() {
         <p className="v2-calc-sub">That’s {money(r.yearly, cur)} a year, from enquiries the business has already paid to create.</p>
         <p className="ss-caption v2-calc-cap">An estimate from your inputs, not a forecast.</p>
         <p className="v2-calc-cta">That’s an estimate. Book a systems audit and we’ll work out your real Keep Rate, in your Recovery Brief.</p>
-        <Button variant="secondary" href="/start">Book a systems audit</Button>
+        <Button variant="secondary" href={bookHref('calculator', { leak_estimate: money(r.monthly, cur) + '/month' })}>Book a systems audit</Button>
       </div>
     </div>
   );

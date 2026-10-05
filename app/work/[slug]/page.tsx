@@ -59,7 +59,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="s-read ss-body-lg v2-read">{c.changed.map((p, i) => <p key={i}>{rich(p)}</p>)}</div>
           {c.quote ? <Testimonial q={c.quote} /> : null}
         </div>
-        <div className="s-ctas" style={{ justifyContent: 'flex-start' }}><BookButton /></div>
+        <div className="s-ctas" style={{ justifyContent: 'flex-start' }}><BookButton placement="case-study" /></div>
       </div></section>
     </SitePage>
   );

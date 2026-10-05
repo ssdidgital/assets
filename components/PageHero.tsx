@@ -9,7 +9,7 @@ export function PageHero({ eyebrow, lede, children }: { eyebrow: string; lede: s
       <Eyebrow>{eyebrow}</Eyebrow>
       <h1 className="s-h1">{children}</h1>
       <p className="ss-body-lg s-lede">{lede}</p>
-      <div className="s-ctas"><BookButton /></div>
+      <div className="s-ctas"><BookButton placement="page-hero" /></div>
     </div></section>
   );
 }

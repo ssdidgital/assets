@@ -48,7 +48,7 @@ export default function SampleAudit() {
           <SecIndex n="04">What it would take</SecIndex>
           <div className="s-doc-body"><Redacted lines={3} seed={19} /></div>
         </article>
-        <div className="s-ctas"><BookButton /></div>
+        <div className="s-ctas"><BookButton placement="sample-audit" /></div>
       </div></section>
     </SitePage>
   );

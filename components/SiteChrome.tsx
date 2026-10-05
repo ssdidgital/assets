@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { BookButton, Button } from './Button';
 import { Em } from './Text';
+import { BOOK_IS_EXTERNAL, bookHref } from '@/lib/links';
 
 export const NAV: [href: string, label: string][] = [
   ['/approach', 'Approach'],
@@ -17,7 +18,7 @@ export function SiteHeader() {
           <img className="s-full" src="/logo-wordmark-gold.svg" alt="System Switch" />
           <img className="s-mark" src="/mark-gold.svg" alt="System Switch" />
         </Link>
-        <Button variant="secondary" size="sm" className="s-head-cta" href="/start">Book a systems audit <span aria-hidden="true">↗</span></Button>
+        <Button variant="secondary" size="sm" className="s-head-cta" href={bookHref('header')}>Book a systems audit <span aria-hidden="true">↗</span></Button>
       </div>
     </header>
   );
@@ -38,7 +39,7 @@ export function ClosingBand({ page = 'home' }: { page?: BandKey }) {
       <div className="s-box s-center" data-theme="linen">
         <h2 className="s-h2" style={{ maxWidth: 820 }}>{hd}</h2>
         <p className="ss-body s-lede">{line}</p>
-        <div className="s-ctas"><BookButton /></div>
+        <div className="s-ctas"><BookButton placement={'band-' + page} /></div>
       </div>
     </section>
   );
@@ -48,7 +49,7 @@ type FootLink = [kind: 'go' | 'a', href: string, label: string];
 
 export function SiteFooter() {
   const cols: [string, FootLink[]][] = [
-    ['Company', [['go', '/approach', 'Approach'], ['go', '/who-we-work-with', 'Who we work with'], ['go', '/about', 'About'], ['go', '/start', 'Book a systems audit']]],
+    ['Company', [['go', '/approach', 'Approach'], ['go', '/who-we-work-with', 'Who we work with'], ['go', '/about', 'About'], [BOOK_IS_EXTERNAL ? 'a' : 'go', bookHref('footer'), 'Book a systems audit']]],
     ['Legal', [['go', '/company', 'System Switch'], ['go', '/privacy', 'Privacy policy'], ['go', '/terms', 'Terms and conditions']]],
     ['Contact', [['a', 'mailto:support@systemswitch.digital', 'support@systemswitch.digital']]]
   ];

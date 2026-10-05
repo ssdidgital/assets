@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { bookHref } from '@/lib/links';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
 type Common = { variant?: Variant; size?: 'md' | 'sm'; className?: string; children: ReactNode };
@@ -17,6 +18,8 @@ export function Button(props: AsLink | AsButton) {
   const cls = cx('ss-btn', 'ss-btn-' + variant, size === 'sm' && 'ss-btn-sm', className);
   const sw = variant === 'primary' ? <span className="ss-btn-switch" aria-hidden="true" /> : null;
   if (props.href !== undefined) {
+    // External links (the Go High Level form) are plain anchors; Next's Link is for routes on this site.
+    if (/^https?:\/\//.test(props.href)) return <a className={cls} href={props.href}>{children}{sw}</a>;
     return <Link className={cls} href={props.href}>{children}{sw}</Link>;
   }
   const { variant: _v, size: _s, className: _c, children: _ch, href: _h, type, ...rest } = props;
@@ -24,6 +27,6 @@ export function Button(props: AsLink | AsButton) {
 }
 
 /** The one conversion CTA. Every primary call to action reads "Book a systems audit". */
-export function BookButton() {
-  return <Button variant="primary" className="s-blink" href="/start">Book a systems audit</Button>;
+export function BookButton({ placement = 'band' }: { placement?: string }) {
+  return <Button variant="primary" className="s-blink" href={bookHref(placement)}>Book a systems audit</Button>;
 }

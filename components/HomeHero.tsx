@@ -11,7 +11,7 @@ export function HomeHero() {
         <p className="s-hero-lede">Most agencies sell you more leads. We start by finding out whether you need them, then fix whatever’s actually costing you sales. You keep everything we build.</p>
         <p className="s-hero-offer"><span className="ss-switch-mini is-on" aria-hidden="true" />Start with a free systems audit, and get your Recovery Brief within 48 hours.</p>
         <div className="s-ctas">
-          <BookButton />
+          <BookButton placement="hero" />
           <Button variant="ghost" href="#how">See how we work →</Button>
         </div>
       </div>

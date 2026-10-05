@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { bookHref } from '@/lib/links';
 import { Button } from '../Button';
 import { Cur } from '../Cur';
 import { FeatureCards } from '../FeatureCards';
@@ -23,18 +24,18 @@ export function V2Router({ n = '01' }: { n?: string }) {
   const items: [IconName, string, string, string][] = [
     ['search', 'How we think ↓', 'The problem we see most often in founder-led businesses, and why more leads rarely fix it.', '#diagnosis'],
     ['workflow', 'How we work →', 'What we build, how an engagement runs, and what you keep at the end.', '/approach'],
-    ['message', 'Ready to talk →', 'Tell us about your business and book a time.', '/start']
+    ['message', 'Ready to talk →', 'Tell us about your business and book a time.', bookHref('router')]
   ];
   return (
     <section className="s-sec"><div className="s-wrap s-center">
       <SecIndex n={n}>Start here</SecIndex>
       <h2 className="s-h2" style={{ marginTop: 0 }}>What brings you by?</h2>
       <div className="s-strip">{items.map(([i, t, d, to]) => (
-        <Link key={t} href={to}>
-          <span className="s-tile"><Icon name={i} size={16} /></span>
-          <h3>{t}</h3>
-          <p>{d}</p>
-        </Link>
+        to.startsWith('http') ? (
+          <a key={t} href={to}><span className="s-tile"><Icon name={i} size={16} /></span><h3>{t}</h3><p>{d}</p></a>
+        ) : (
+          <Link key={t} href={to}><span className="s-tile"><Icon name={i} size={16} /></span><h3>{t}</h3><p>{d}</p></Link>
+        )
       ))}</div>
     </div></section>
   );

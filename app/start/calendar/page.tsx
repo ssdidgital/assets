@@ -2,11 +2,14 @@ import Link from 'next/link';
 import { NextPanel } from '@/components/book/NextPanel';
 import { SitePage } from '@/components/SiteChrome';
 import { Em } from '@/components/Text';
+import { GoToBooking } from '@/components/book/GoToBooking';
+import { BOOK_IS_EXTERNAL } from '@/lib/links';
 import { pageMeta } from '@/lib/meta';
 
 export const metadata = pageMeta('start', '/start/calendar', { index: false });
 
 export default function Calendar() {
+  if (BOOK_IS_EXTERNAL) return <SitePage><GoToBooking /></SitePage>;
   return (
     <SitePage>
       <section className="s-sec s-sec-first"><div className="s-wrap s-book">

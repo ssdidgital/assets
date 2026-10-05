@@ -10,7 +10,7 @@ export default function NotFound() {
       <section className="s-sec s-sec-first s-stub"><div className="s-wrap s-center">
         <h1 className="ss-display s-h0" style={{ maxWidth: 760 }}>This page has gone quiet.</h1>
         <p className="ss-body-lg s-lede">Most things do without follow-up.</p>
-        <div className="s-ctas"><Button variant="ghost" href="/">Home</Button><BookButton /></div>
+        <div className="s-ctas"><Button variant="ghost" href="/">Home</Button><BookButton placement="404" /></div>
       </div></section>
     </SitePage>
   );
