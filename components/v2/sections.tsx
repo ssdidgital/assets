@@ -133,9 +133,8 @@ export function V2Founder({ n = '06' }: { n?: string }) {
       <div className="s-founder">
         <div className="s-portrait"><span className="ss-label">Portrait — 4:5, professional</span></div>
         <div className="s-founder-text">
-          <h2 className="s-h2" style={{ marginTop: 0 }}>Built by <Em>a closer.</Em></h2>
-          <p className="ss-body">Kyū spent six years on sales floors, taking <strong><Ph>[[X,XXX+]]</Ph></strong> calls and closing <strong><Ph>[[<Cur />X]]</Ph></strong> in high-ticket deals for B2B and B2C businesses, and watching five-figure buyers slip through the follow-up gap.</p>
-          <p className="ss-body">Before that, he helped grow a youth-services company to £800,000 a year (nearly $1 million), then lost it, because it ran on one person’s effort instead of systems. Those two lessons are what System Switch is built on: go back for the buyers you’ve earned, and build it so it runs without you.</p>
+          <h2 className="s-h2" style={{ marginTop: 0 }}>Why <Em>System Switch</Em> exists.</h2>
+          <p className="ss-body">Kyū spent six years closing high-ticket deals: <strong><Ph>[[X,XXX+]]</Ph></strong> calls and <strong><Ph>[[<Cur />X]]</Ph></strong> closed. He kept seeing the same buyers slip away after the call. Before that, he’d lost a business of his own, for a reason most founders don’t see coming.</p>
           <Button variant="ghost" href="/about">Read the story →</Button>
         </div>
       </div>
