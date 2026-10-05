@@ -29,7 +29,7 @@ export function CookieBanner() {
   return (
     <div className="s-cookie" role="region" aria-label="Cookies">
       <div className="s-wrap s-cookie-in">
-        <p className="ss-body-sm">We use essential cookies to run this site, and optional ones to understand how it&apos;s used.</p>
+        <p className="ss-body-sm">We use essential cookies to run this site, and optional ones to understand how it’s used.</p>
         <div className="s-cookie-btns">
           <Button variant="secondary" size="sm" onClick={() => choose('all')}>Accept all</Button>
           <Button variant="secondary" size="sm" onClick={() => choose('essential')}>Essential only</Button>

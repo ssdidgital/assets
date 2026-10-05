@@ -7,12 +7,12 @@ export function SystemDiagram() {
     <figure className="v2-sys">
       <figcaption className="v2-sys-head">
         <span className="ss-label v2-sys-k">The system</span>
-        <h3 className="ss-h3">Holding a buyer between <Em>&quot;interested&quot; and &quot;ready&quot;</Em></h3>
+        <h3 className="ss-h3">Holding a buyer between <Em>“interested” and “ready”</Em></h3>
       </figcaption>
-      <div className="v2-sys-body" role="img" aria-label='A buyer who said "not now" either goes quiet in the CRM and buys later from someone else, or, with the system, gets fast follow-up, is brought back to the table and books a qualified call.'>
+      <div className="v2-sys-body" role="img" aria-label='A buyer who said “not now” either goes quiet in the CRM and buys later from someone else, or, with the system, gets fast follow-up, is brought back to the table and books a qualified call.'>
         <div className="v2-node v2-node-wait v2-sys-in">
           <span className="v2-sw v2-sw-wait" />
-          <div><strong>Said &quot;not now&quot;.</strong><p>Interested, qualified, and left in the CRM.</p></div>
+          <div><strong>Said “not now”.</strong><p>Interested, qualified, and left in the CRM.</p></div>
         </div>
         <div className="v2-fork" />
         <div className="v2-lanes">
@@ -34,7 +34,7 @@ export function SystemDiagram() {
       </div>
       <ul className="v2-legend" aria-label="Key">
         <li><span className="v2-sw v2-sw-now" />Bought straight away.</li>
-        <li><span className="v2-sw v2-sw-wait" />Said &quot;not now&quot;.</li>
+        <li><span className="v2-sw v2-sw-wait" />Said “not now”.</li>
         <li><span className="v2-sw v2-sw-leak" />Bought later, elsewhere.</li>
       </ul>
     </figure>

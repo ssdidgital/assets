@@ -9,3 +9,9 @@ button, input, select, textarea { font: inherit; color: inherit; border-radius: 
 .s-skip { position: absolute; left: 16px; top: -100px; z-index: 40; padding: 10px 14px; background: var(--bg-raised); border: 1px solid var(--text-primary); color: var(--text-primary); }
 .s-skip:focus { top: 16px; }
 .s-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Typographic finish: gold selection, hanging punctuation where supported, no orphans in running text. */
+::selection { background: var(--tint-accent); color: var(--text-primary); }
+[data-theme="forest"] ::selection { background: var(--gold-500); color: var(--forest-900); }
+html { hanging-punctuation: first last; }
+p, li { text-wrap: pretty; }

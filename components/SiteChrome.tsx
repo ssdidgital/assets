@@ -26,9 +26,9 @@ export function SiteHeader() {
 export type BandKey = 'home' | 'approach' | 'who';
 
 const BANDS: Record<BandKey, [ReactNode, ReactNode]> = {
-  home: [<>Every business has <Em>one constraint</Em> holding the rest back.</>, <>Tell us about your business. If we can help, we&apos;ll show you where to start.<br />If we can&apos;t, we&apos;ll say so.</>],
-  approach: [<>Start with <Em>a systems audit.</Em></>, "Tell us where your business is and where you want it to go. We'll tell you honestly whether we can help, and where we'd start."],
-  who: [<>Sound like <Em>your business?</Em></>, "Tell us where things stand. If we're a fit, we'll show you where we'd start."]
+  home: [<>Every business has <Em>one constraint</Em> holding the rest back.</>, <>Tell us about your business. If we can help, we’ll show you where to start.<br />If we can’t, we’ll say so.</>],
+  approach: [<>Start with <Em>a systems audit.</Em></>, "Tell us where your business is and where you want it to go. We’ll tell you honestly whether we can help, and where we’d start."],
+  who: [<>Sound like <Em>your business?</Em></>, "Tell us where things stand. If we’re a fit, we’ll show you where we’d start."]
 };
 
 export function ClosingBand({ page = 'home' }: { page?: BandKey }) {

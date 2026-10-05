@@ -15,7 +15,7 @@ export default function Start() {
           <h1 className="s-h2">Book <Em>a systems audit</Em></h1>
           <div className="s-book-intro ss-body-lg">
             <p>Tell us a little about your business. It takes about three minutes, and it means the call is about you from the first minute.</p>
-            <p>If we can help, we&apos;ll show you where we&apos;d start. If we can&apos;t, we&apos;ll tell you, and point you somewhere better if we know of somewhere.</p>
+            <p>If we can help, we’ll show you where we’d start. If we can’t, we’ll tell you, and point you somewhere better if we know of somewhere.</p>
           </div>
           <BookForm />
         </div>

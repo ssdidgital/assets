@@ -49,7 +49,7 @@ export function BookForm() {
   let n = 0;
   return (
     <form className="s-form" onSubmit={submit} noValidate>
-      {errs ? <p className="s-form-error ss-body" role="alert">Something didn&apos;t go through. Check the highlighted fields and try again.</p> : null}
+      {errs ? <p className="s-form-error ss-body" role="alert">Something didn’t go through. Check the highlighted fields and try again.</p> : null}
       {BOOK_SECTIONS.map((s) => (
         <section key={s.title} className="ss-card s-form-card">
           <h2 className="ss-h3" style={{ margin: 0 }}>{s.title}</h2>

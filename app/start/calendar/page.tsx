@@ -13,7 +13,7 @@ export default function Calendar() {
         <div className="s-book-main">
           <span className="ss-label s-eyebrow">Application</span>
           <h1 className="s-h2">Choose a time that <Em>suits you</Em></h1>
-          <p className="ss-body-lg s-book-intro">Calls last 30 minutes, on Zoom. Pick a slot below and you&apos;ll get a confirmation straight away.</p>
+          <p className="ss-body-lg s-book-intro">Calls last 30 minutes, on Zoom. Pick a slot below and you’ll get a confirmation straight away.</p>
           {/* Placeholder until the real booking widget is embedded; the widget should redirect to /start/booked. */}
           <Link className="s-cal" href="/start/booked">
             <span className="ss-label">Calendar embed</span>

@@ -19,13 +19,13 @@ export const BOOK_SECTIONS: { title: string; qs: Question[] }[] = [
     { id: 'biz', label: 'Business name and website', type: 'text' }
   ] },
   { title: 'About the business', qs: [
-    { id: 'sell', label: 'What do you sell, and roughly what does a client pay?', type: 'text', help: 'e.g. "a 6-month coaching programme, $8,000".' },
-    { id: 'revenue', label: 'Roughly what does the business bring in each month?', opts: ['Under $20k', '$20k–$50k', '$50k–$100k', '$100k–$400k', 'Over $400k', "I'd rather say on the call"] },
+    { id: 'sell', label: 'What do you sell, and roughly what does a client pay?', type: 'text', help: 'e.g. “a 6-month coaching programme, $8,000”.' },
+    { id: 'revenue', label: 'Roughly what does the business bring in each month?', opts: ['Under $20k', '$20k–$50k', '$50k–$100k', '$100k–$400k', 'Over $400k', "I’d rather say on the call"] },
     { id: 'buy', label: 'How do clients usually buy from you?', opts: ['After a sales or discovery call', 'Directly online, with no call', 'Through a proposal or quote', 'A mix of these'] },
-    { id: 'sales', label: 'Who handles sales today?', opts: ['Just me', 'Me plus a closer or small sales team', "A sales team I don't personally manage"] }
+    { id: 'sales', label: 'Who handles sales today?', opts: ['Just me', 'Me plus a closer or small sales team', "A sales team I don’t personally manage"] }
   ] },
   { title: 'Where things stand', qs: [
-    { id: 'losing', label: 'Where do you feel the business is losing the most?', opts: ['Not enough of the right people finding us', "Interest that doesn't turn into calls", 'Past leads and enquiries we never followed up properly', "Clients who don't stay, buy again or refer", "I'm honestly not sure"] },
+    { id: 'losing', label: 'Where do you feel the business is losing the most?', opts: ['Not enough of the right people finding us', "Interest that doesn’t turn into calls", 'Past leads and enquiries we never followed up properly', "Clients who don’t stay, buy again or refer", "I’m honestly not sure"] },
     { id: 'list', label: 'Roughly how many past leads, enquiries or clients are in your CRM or inbox?', opts: ['Under 500', '500–2,000', '2,000–10,000', 'Over 10,000', 'No idea'] },
     { id: 'why', label: 'What made you reach out now?', long: true, help: 'A sentence or two is plenty.' },
     { id: 'heard', label: 'How did you hear about us?', optional: true, opts: ['Referral', 'LinkedIn', 'Message from Kyū', 'Search', 'Other'] }
