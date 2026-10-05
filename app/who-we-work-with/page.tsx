@@ -2,6 +2,9 @@ import { Icon, type IconName } from '@/components/Icon';
 import { PageHero } from '@/components/PageHero';
 import { SitePage } from '@/components/SiteChrome';
 import { Em } from '@/components/Text';
+import { pageMeta } from '@/lib/meta';
+
+export const metadata = pageMeta('who', '/who-we-work-with');
 
 // Copy is verbatim from design/design-reference/SitePages.jsx.txt (SiteWho).
 const cards: [IconName, string, string][] = [

@@ -2,6 +2,9 @@ import { BookForm } from '@/components/book/BookForm';
 import { NextPanel } from '@/components/book/NextPanel';
 import { SitePage } from '@/components/SiteChrome';
 import { Em } from '@/components/Text';
+import { pageMeta } from '@/lib/meta';
+
+export const metadata = pageMeta('start', '/start');
 
 export default function Start() {
   return (

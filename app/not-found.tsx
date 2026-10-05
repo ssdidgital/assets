@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { BookButton, Button } from '@/components/Button';
 import { SitePage } from '@/components/SiteChrome';
 
-export const metadata: Metadata = { title: 'Page not found — System Switch' };
+export const metadata: Metadata = { title: 'Page not found — System Switch', description: null, alternates: { canonical: null }, openGraph: null, twitter: null, robots: { index: false } };
 
 export default function NotFound() {
   return (

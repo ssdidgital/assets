@@ -2,6 +2,9 @@ import { Icon } from '@/components/Icon';
 import { PageHero } from '@/components/PageHero';
 import { SitePage } from '@/components/SiteChrome';
 import { Em, Eyebrow } from '@/components/Text';
+import { pageMeta } from '@/lib/meta';
+
+export const metadata = pageMeta('approach', '/approach');
 
 // Copy is verbatim from design/design-reference/SitePages.jsx.txt (SiteApproach).
 const principles: [string, string, boolean?][] = [

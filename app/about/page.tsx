@@ -1,5 +1,8 @@
 import { SitePage } from '@/components/SiteChrome';
 import { Em, Eyebrow, Ph } from '@/components/Text';
+import { pageMeta } from '@/lib/meta';
+
+export const metadata = pageMeta('about', '/about');
 
 // Copy is verbatim from design/design-reference/SitePages.jsx.txt (SiteAbout). Closing band uses the homepage copy.
 export default function About() {

@@ -1,12 +1,14 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { CookieBanner } from '@/components/CookieBanner';
+import { ScrollReveal } from '@/components/ScrollReveal';
 import { SiteFooter, SiteHeader } from '@/components/SiteChrome';
+import { pageMeta, SITE_URL } from '@/lib/meta';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'System Switch — Growth infrastructure for founder-led businesses',
-  description: "We engineer the systems that win clients, and win back the buyers you've already paid for. For coaches, consultants and service providers."
+  metadataBase: new URL(SITE_URL),
+  ...pageMeta('home', '/')
 };
 
 export const viewport: Viewport = { themeColor: '#f5f3ec' };
@@ -25,6 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
           <SiteFooter />
           <CookieBanner />
+          <ScrollReveal />
         </div>
       </body>
     </html>

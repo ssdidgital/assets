@@ -2,6 +2,9 @@ import Link from 'next/link';
 import { NextPanel } from '@/components/book/NextPanel';
 import { SitePage } from '@/components/SiteChrome';
 import { Em } from '@/components/Text';
+import { pageMeta } from '@/lib/meta';
+
+export const metadata = pageMeta('start', '/start/calendar', { index: false });
 
 export default function Calendar() {
   return (
