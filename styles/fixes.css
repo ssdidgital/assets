@@ -11,3 +11,6 @@
 
 /* site.css redefines .s-founder columns after its 900px stacking rule, so the founder block never stacked. */
 @media (max-width: 900px) { .s-founder { grid-template-columns: 1fr; gap: var(--space-12); } }
+
+/* The calendar placeholder is a link here (a button in the prototype); drop the default underline. */
+.s-cal { text-decoration: none; }
