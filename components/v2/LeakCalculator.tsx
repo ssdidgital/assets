@@ -6,9 +6,9 @@ import { leak, LEAK_DEFAULTS, money, saveLeak, type Currency, type LeakInputs } 
 import { Button } from '../Button';
 import { Em } from '../Text';
 
-type SliderProps = { id: string; label: string; help?: string; min: number; max: number; step: number; value: number; text: string; onChange: (v: number) => void };
+type SliderProps = { id: string; label: string; help?: string; min: number; max: number; step: number; value: number; text: string; lo?: string; hi?: string; onChange: (v: number) => void };
 
-function Slider({ id, label, help, min, max, step, value, text, onChange }: SliderProps) {
+function Slider({ id, label, help, min, max, step, value, text, lo, hi, onChange }: SliderProps) {
   const pct = ((value - min) / (max - min)) * 100;
   return (
     <div className="v2-calc-f">
@@ -18,6 +18,7 @@ function Slider({ id, label, help, min, max, step, value, text, onChange }: Slid
       </div>
       <input id={id} type="range" className="v2-range" min={min} max={max} step={step} value={value} aria-valuetext={text}
         aria-describedby={help ? id + '-help' : undefined} style={{ '--p': pct + '%' } as React.CSSProperties} onChange={(e) => onChange(Number(e.target.value))} />
+      <span className="v2-calc-ends" aria-hidden="true"><span>{lo ?? min}</span><span>{hi ?? max}</span></span>
       {help ? <span id={id + '-help'} className="v2-calc-help">{help}</span> : null}
     </div>
   );
@@ -28,7 +29,8 @@ export function LeakCalculator() {
   const cur = useCurrency();
   const [v, setV] = useState<Omit<LeakInputs, 'currency'>>(LEAK_DEFAULTS);
   const touched = useRef(false);
-  const set = (k: keyof Omit<LeakInputs, 'currency'>) => (x: number) => { touched.current = true; setV((s) => ({ ...s, [k]: x })); };
+  const [idle, setIdle] = useState(true);
+  const set = (k: keyof Omit<LeakInputs, 'currency'>) => (x: number) => { touched.current = true; setIdle(false); setV((s) => ({ ...s, [k]: x })); };
   const inputs: LeakInputs = { ...v, currency: cur };
   useEffect(() => { if (touched.current) saveLeak({ ...v, currency: cur }); }, [v, cur]);
   const r = leak(inputs);
@@ -45,12 +47,16 @@ export function LeakCalculator() {
     <div className="s-illo v2-calc">
       <span className="ss-label s-illo-k">Your numbers</span>
       <h3 className="ss-h3 s-illo-h"><Em>Twelve months</Em> of enquiries</h3>
-      <div className="v2-calc-in">
+      <p className={'v2-calc-cue' + (idle ? ' is-idle' : '')}>
+        <span className="v2-calc-cue-k" aria-hidden="true">⟷</span>
+        {idle ? 'Drag the sliders to your numbers. The bar and the total update as you go.' : 'Updated to your numbers.'}
+      </p>
+      <div className={'v2-calc-in' + (idle ? ' is-idle' : '')}>
         <Slider id="calc-enq" label="Enquiries a month" min={5} max={500} step={5} value={v.enquiries} text={String(v.enquiries)} onChange={set('enquiries')} />
-        <Slider id="calc-now" label="Buy straight away" min={5} max={60} step={1} value={v.closeRate} text={v.closeRate + '%'} onChange={set('closeRate')} />
-        <Slider id="calc-later" label="Of the rest, buy later elsewhere" help="A guess is fine. We find the real figure on the call." min={5} max={70} step={1} value={v.laterElsewhere} text={v.laterElsewhere + '%'} onChange={set('laterElsewhere')} />
-        <div className="v2-calc-f">
-          <Slider id="calc-val" label="What a client is worth" min={500} max={50000} step={500} value={v.value} text={money(v.value, cur)} onChange={set('value')} />
+        <Slider id="calc-now" label="Buy straight away" min={5} max={60} step={1} value={v.closeRate} text={v.closeRate + '%'} lo="5%" hi="60%" onChange={set('closeRate')} />
+        <Slider id="calc-later" label="Of the rest, buy later elsewhere" help="A guess is fine. We find the real figure on the call." min={5} max={70} step={1} value={v.laterElsewhere} text={v.laterElsewhere + '%'} lo="5%" hi="70%" onChange={set('laterElsewhere')} />
+        <div className="v2-calc-f v2-calc-grp">
+          <Slider id="calc-val" label="What a client is worth" min={500} max={50000} step={500} value={v.value} text={money(v.value, cur)} lo={money(500, cur)} hi={money(50000, cur)} onChange={set('value')} />
           <div className="v2-cur" role="radiogroup" aria-label="Currency">
             {(['GBP', 'USD'] as Currency[]).map((c) => (
               <button key={c} type="button" role="radio" aria-checked={cur === c} onClick={() => { touched.current = true; setCurrency(c); }}>{c === 'GBP' ? '£ GBP' : '$ USD'}</button>

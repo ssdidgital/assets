@@ -203,3 +203,24 @@ body:has(.s-v2) .s-head[data-scrolled] { background: var(--bg-canvas); border-bo
 .v2-calc-out .v2-calc-big { margin-top: var(--space-6); }
 .v2-calc-cap { margin: 0; color: var(--text-secondary); }
 .v2-calc-cta { margin: var(--space-6) 0 0; padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); max-width: 560px; font: 500 16px/1.5 var(--font-sans); text-wrap: balance; }
+
+/* Calculator affordance: a visible cue, a grippable knob, and a nudge until first touch. */
+.v2-calc-cue { margin: var(--space-6) 0 0; display: inline-flex; align-items: center; gap: var(--space-3); padding: 8px 14px; border: 1px solid var(--accent-fill); font: 500 13px/18px var(--font-sans); color: var(--text-primary); }
+.v2-calc-cue:not(.is-idle) { border-color: var(--border-subtle); color: var(--text-secondary); }
+.v2-calc-cue-k { font: 500 16px/1 var(--font-mono); color: var(--accent-text); }
+.v2-calc-cue.is-idle .v2-calc-cue-k { animation: v2-cue 1.6s ease-in-out infinite; }
+@keyframes v2-cue { 0%,100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+.v2-calc-f { padding: var(--space-3); margin: calc(var(--space-3) * -1); transition: background-color .2s; }
+.v2-calc-f:hover, .v2-calc-f:focus-within { background: color-mix(in srgb, var(--accent-fill) 7%, transparent); }
+.v2-range { height: 32px; }
+.v2-range::-webkit-slider-runnable-track { height: 8px; }
+.v2-range::-moz-range-track, .v2-range::-moz-range-progress { height: 8px; }
+.v2-range::-webkit-slider-thumb { width: 26px; height: 26px; margin-top: -9px; border: 2px solid var(--bg-canvas); box-shadow: 0 0 0 1px var(--accent-fill), 0 2px 6px rgba(0,0,0,.25); background: var(--accent-fill) linear-gradient(90deg, transparent 8px, rgba(0,0,0,.35) 8px 9px, transparent 9px 12px, rgba(0,0,0,.35) 12px 13px, transparent 13px); cursor: grab; transition: transform .15s; }
+.v2-range::-moz-range-thumb { width: 22px; height: 22px; border: 2px solid var(--bg-canvas); box-shadow: 0 0 0 1px var(--accent-fill), 0 2px 6px rgba(0,0,0,.25); background: var(--accent-fill); cursor: grab; }
+.v2-range:hover::-webkit-slider-thumb, .v2-range:focus-visible::-webkit-slider-thumb { transform: scale(1.12); }
+.v2-range:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.18); }
+.v2-calc-in.is-idle .v2-calc-f:first-child .v2-range::-webkit-slider-thumb { animation: v2-knob 1.6s ease-in-out infinite; }
+@keyframes v2-knob { 0%,100% { box-shadow: 0 0 0 1px var(--accent-fill), 0 0 0 0 color-mix(in srgb, var(--accent-fill) 50%, transparent); } 50% { box-shadow: 0 0 0 1px var(--accent-fill), 0 0 0 8px transparent; } }
+.v2-calc-ends { display: flex; justify-content: space-between; font: 400 11px/1 var(--font-mono); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .v2-calc-cue-k, .v2-calc-in.is-idle .v2-range::-webkit-slider-thumb { animation: none !important; } }
+.v2-calc-grp { padding: 0; margin: 0; background: none !important; }
