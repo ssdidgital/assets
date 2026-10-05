@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BookButton, Button } from '../Button';
+import { HomeHero } from '../HomeHero';
 import { FeatureCards } from '../FeatureCards';
 import { Icon, type IconName } from '../Icon';
 import { Em, Eyebrow, Ph } from '../Text';
@@ -8,23 +9,7 @@ import { Faq } from './Faq';
 // Homepage sections. Copy is verbatim from design/design-reference/SiteHome.jsx.txt.
 
 export function HHero() {
-  return (
-    <section className="s-dots s-hero">
-      <div className="s-wrap s-center">
-        <h1 className="s-hero-h"><span>We engineer the systems that win clients,</span> <span>and <Em>win back the buyers you’ve already paid for.</Em></span></h1>
-        <p className="s-hero-pos">System Switch is a growth infrastructure firm for founder-led coaches, consultants and service providers.</p>
-        <ol className="s-hero-steps">
-          <li><span className="s-qn">01</span>We find where revenue is leaking</li>
-          <li><span className="s-qn">02</span>We install the systems that stop it</li>
-          <li><span className="s-qn">03</span>We hand you the controls</li>
-        </ol>
-        <div className="s-ctas">
-          <BookButton />
-          <Button variant="ghost" href="#how">See how we work →</Button>
-        </div>
-      </div>
-    </section>
-  );
+  return <HomeHero />;
 }
 
 export function HRouter() {

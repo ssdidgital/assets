@@ -34,29 +34,27 @@
 .s-booked-start { margin: var(--space-6) 0 0; max-width: 640px; padding: var(--space-4) var(--space-6); border: 1px solid var(--border-subtle); background: var(--bg-raised); text-wrap: pretty; }
 .s-booked-start strong { font-weight: 600; color: var(--accent-text); }
 
-/* Hero hierarchy (both homepages): headline in two clauses, a quieter positioning line, then what we do as three ruled steps.
-   site.css made the gold phrase its own block, which forced the headline onto four lines; each clause is now the block instead. */
-.s-hero-h { font-size: clamp(36px, 4.15vw, 56px); line-height: 1.06; letter-spacing: -.04em; max-width: none; margin-top: 0; }
+/* Homepage hero: eyebrow, a two-clause headline that breaks after “sales:” on desktop, then one supporting paragraph.
+   site.css made the gold phrase its own block, which forced extra lines; each clause is the block instead. */
+.s-hero-h { font-size: clamp(34px, 3.75vw, 52px); line-height: 1.08; letter-spacing: -.04em; max-width: none; margin-top: var(--space-8); }
 .s-hero-h > span { display: block; text-wrap: balance; }
 .s-hero-h .ss-emphasis-inline { display: inline; }
-.s-hero-pos { margin: var(--space-8) auto 0; max-width: 600px; font: 400 19px/1.55 var(--font-sans); letter-spacing: -.005em; color: var(--text-secondary); text-wrap: balance; }
-.s-hero-steps { list-style: none; margin: var(--space-12) 0 0; padding: 0; width: 100%; max-width: 860px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--border-strong); border-bottom: 1px solid var(--border-strong); text-align: left; }
-.s-hero-steps li { display: flex; gap: var(--space-3); align-items: baseline; padding: var(--space-4) var(--space-6); font: 500 16px/1.35 var(--font-sans); color: var(--text-primary); }
-.s-hero-steps li + li { border-left: 1px solid var(--border-strong); }
-.s-hero-steps .s-qn { margin: 0; }
-.s-hero .s-ctas { margin-top: var(--space-12); }
+.s-hero-lede { margin: var(--space-8) auto 0; max-width: 660px; font: 400 19px/1.6 var(--font-sans); letter-spacing: -.005em; color: var(--text-secondary); text-wrap: balance; }
+.s-hero-act { color: var(--text-primary); }
+.s-hero .s-ctas { margin-top: 40px; }
 @media (max-width: 767px) {
-  .s-hero-h { font-size: 34px; line-height: 38px; }
+  .s-hero-h { font-size: 34px; line-height: 38px; margin-top: var(--space-6); }
   .s-hero-h > span + span { margin-top: 4px; }
-  .s-hero-pos { font-size: 17px; line-height: 26px; margin-top: var(--space-6); }
-  .s-hero-steps { grid-template-columns: 1fr; margin-top: var(--space-8); }
-  .s-hero-steps li { padding: var(--space-3) var(--space-1); }
-  .s-hero-steps li + li { border-left: 0; border-top: 1px solid var(--border-subtle); }
+  .s-hero-lede { font-size: 17px; line-height: 27px; margin-top: var(--space-6); text-wrap: pretty; }
   .s-hero .s-ctas { margin-top: var(--space-8); }
 }
 
 /* Wrapping: every heading balances its lines; on phones, headings and questions use pretty wrapping so no single word is left on the last line. */
 h1, h2, h3, .ss-h3, .s-faq-i button > span:first-child { text-wrap: balance; }
 @media (max-width: 767px) { h1, h2, h3, .ss-h3, .s-faq-i button > span:first-child { text-wrap: pretty; } }
-/* At wide screens each hero step stays on one line; the row sizes to its content. */
-@media (min-width: 1100px) { .s-hero-steps { display: flex; justify-content: center; width: auto; max-width: none; } .s-hero-steps li { white-space: nowrap; } }
+
+/* Hero copy: the closing sentence (what we do) starts its own line, so the paragraph reads context first, then the offer. */
+.s-hero-lede { max-width: 720px; }
+.s-hero-act { display: block; margin-top: 6px; }
+/* The hero eyebrow stays on one line on phones. */
+@media (max-width: 767px) { .s-hero .s-eyebrow { white-space: nowrap; font-size: 10px; letter-spacing: .12em; padding: 7px 10px; } }
