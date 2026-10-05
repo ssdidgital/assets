@@ -91,3 +91,10 @@ h1, h2, h3, .ss-h3, .s-faq-i button > span:first-child { text-wrap: balance; }
 .s-portrait-tag { position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--bg-canvas); border-top: 1px solid var(--border-strong); border-right: 1px solid var(--border-strong); font: 500 11px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--text-primary); }
 .s-portrait-tag i { width: 14px; height: 6px; background: var(--accent-fill); }
 @media (max-width: 767px) { .s-portrait-img { margin: 0 8px 8px 0; } .s-portrait-img::before { transform: translate(8px, 8px); } }
+
+/* Founder portrait: smaller, with the offset frame filled off-white like a mount. */
+.s-portrait-img::before { background: var(--paper, #fbfaf6); }
+.s-founder .s-portrait-img { max-width: 340px; justify-self: center; }
+.s-portrait-img.s-portrait-lg { max-width: 400px; margin: var(--space-12) auto 14px; }
+@media (min-width: 901px) { .s-founder { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); } }
+@media (max-width: 767px) { .s-founder .s-portrait-img { max-width: 300px; } }
