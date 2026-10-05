@@ -64,3 +64,14 @@ h1, h2, h3, .ss-h3, .s-faq-i button > span:first-child { text-wrap: balance; }
 .s-hero-offer + .s-ctas { margin-top: var(--space-6); }
 @media (max-width: 767px) { .s-hero-offer { font-size: 15px; align-items: baseline; text-align: left; } }
 .v2-statement-sub { display: block; margin-top: 8px; color: var(--accent-text); }
+
+/* Dot grids sit back: lighter dots, faded out behind the text so it reads cleanly. */
+.s-dots { background-image: radial-gradient(var(--border-subtle) 1px, transparent 1.4px); -webkit-mask-image: none; }
+.s-hero.s-dots { position: relative; background-image: none; }
+.s-hero.s-dots::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(var(--border-strong) 1px, transparent 1.4px); background-size: 14px 14px; background-position: 7px 7px;
+  -webkit-mask-image: radial-gradient(ellipse 55% 50% at 50% 52%, transparent 35%, #000 100%); mask-image: radial-gradient(ellipse 55% 50% at 50% 52%, transparent 35%, #000 100%); pointer-events: none; }
+.s-hero.s-dots > * { position: relative; }
+.v2-board, .v2-sys-body, .v3-board { background-image: radial-gradient(var(--border-subtle) 1px, transparent 1.4px); }
+/* The system diagram on the Approach page. */
+.s-approach-sys { width: 100%; max-width: 1144px; text-align: left; }
+.s-approach-sys .v2-sys { margin-top: var(--space-16); }

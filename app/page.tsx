@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <HeaderScroll />
       <main id="main" className="s-v2">
-        <div className="s-frame"><V2Hero /><V2Router /><V2Diagnosis /><V2Build /></div>
+        <div className="s-frame"><V2Hero /><V2Router /><V2Diagnosis /><V2Build diagram={false} /></div>
         <V2How />
         <div className="s-frame"><V2Fit /><V2Founder /><V2Faq /></div>
       </main>

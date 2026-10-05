@@ -1,4 +1,5 @@
 import { Icon } from '@/components/Icon';
+import { SystemDiagram } from '@/components/v2/SystemDiagram';
 import { PageHero } from '@/components/PageHero';
 import { SitePage } from '@/components/SiteChrome';
 import { Em, Eyebrow } from '@/components/Text';
@@ -42,6 +43,7 @@ export default function Approach() {
         <ol className="s-steplist">{steps.map(([t, p], i) => (
           <li key={t}><span className="s-stepn">{String(i + 1).padStart(2, '0')}</span><div><h3 className="ss-h3">{t}</h3><p className="ss-body">{p}</p></div></li>
         ))}</ol>
+        <div className="s-approach-sys"><SystemDiagram /></div>
       </div></section>
       <section className="s-sec"><div className="s-wrap s-center">
         <div className="s-panel">

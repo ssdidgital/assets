@@ -45,13 +45,6 @@ export function V2Diagnosis({ n = '02' }: { n?: string }) {
     <section className="s-sec s-sunk" id="diagnosis"><div className="s-wrap">
       <SecIndex n={n}>What the CRM won’t tell you</SecIndex>
       <h2 className="s-h2 v2-h v2-h-wide">Most businesses think they need more leads. <Em><br />They’re losing buyers in the Not-Yet Gap.</Em></h2>
-      <div className="v2-split v2-offset">
-        <div aria-hidden="true" />
-        <div className="s-read ss-body v2-read">
-          <p>Every month, people raise their hand. They book a call, watch the training, ask about price. Then the timing’s wrong, and they say “not now”. The team moves on to this week’s enquiries, and everyone from last month goes quiet in the CRM.</p>
-          <p>But “not now” rarely means “not interested”. It usually means “not yet”. The money wasn’t free, the timing was off, life got loud. That stretch between “not now” and ready is the Not-Yet Gap. Many of the people in it still buy, eventually. From whoever followed up.</p>
-        </div>
-      </div>
       <LeakCalculator />
       <div className="v2-split v2-close">
         <p className="v2-statement">We measure growth by what a business keeps. <span className="v2-statement-sub">We call it your Keep Rate.</span></p>
