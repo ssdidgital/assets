@@ -52,6 +52,9 @@ for (const src of files) {
     let c = readFileSync(src, 'utf8');
     c = c.replace(/url\(["']?\/fonts\/([^"')]+)["']?\)/g, (_, f) => `url("${font(f)}")`);
     writeFileSync(dst, c);
+  } else if (src.endsWith('.js')) {
+    // Literal U+FFFD (used by React's text decoding) written as its escape, which means the same in JS strings and regexes.
+    writeFileSync(dst, readFileSync(src, 'utf8').replace(/\uFFFD/g, '\\uFFFD'));
   } else {
     cpSync(src, dst);
   }
