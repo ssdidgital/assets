@@ -1,0 +1,13 @@
+/* Fixes on top of site.css, loaded after it. Each one notes what it corrects. */
+
+/* Long footer links (the support email) overflow their column at 390px. */
+.s-foot-cols a { overflow-wrap: anywhere; }
+
+/* In-page anchors (#how, #diagnosis) land below the sticky header, as the prototype scrolls to top - 88px. */
+[id] { scroll-margin-top: 88px; }
+
+/* Router strip items are links here (buttons in the prototype); drop the default underline. */
+.s-strip > a { text-decoration: none; }
+
+/* site.css redefines .s-founder columns after its 900px stacking rule, so the founder block never stacked. */
+@media (max-width: 900px) { .s-founder { grid-template-columns: 1fr; gap: var(--space-12); } }
