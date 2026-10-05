@@ -1,5 +1,5 @@
 import { ogContentType, ogImage, ogSize } from '@/lib/og';
-import { ARTICLES, findArticle } from '@/lib/insights';
+import { ARTICLES, findArticle } from '@/lib/digest';
 
 export const dynamic = 'force-static';
 export const size = ogSize;
@@ -10,5 +10,5 @@ export function generateStaticParams() { return ARTICLES.map((x) => ({ slug: x.s
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const x = findArticle((await params).slug)!;
-  return ogImage('Insights', x.title.replace(/\[\[(.+?)\]\]/g, '$1'));
+  return ogImage('Digest', x.title.replace(/\[\[(.+?)\]\]/g, '$1'));
 }

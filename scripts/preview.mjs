@@ -67,7 +67,7 @@ for (const f of readdirSync('emails').filter((f) => f.endsWith('.html'))) {
 }
 // Share cards as PNGs for the hub.
 mkdirSync('preview/og', { recursive: true });
-for (const [name, p] of [['home', ''], ['approach', 'approach/'], ['who', 'who-we-work-with/'], ['about', 'about/'], ['start', 'start/'], ['work', 'work/'], ['case', 'work/example/'], ['insights', 'insights/'], ['article', 'insights/the-not-now-problem/']]) {
+for (const [name, p] of [['home', ''], ['approach', 'approach/'], ['who', 'who-we-work-with/'], ['about', 'about/'], ['start', 'start/'], ['work', 'work/'], ['case', 'work/example/'], ['digest', 'digest/'], ['article', 'digest/the-not-now-problem/']]) {
   cpSync(join(OUT, p + 'opengraph-image'), join('preview/og', name + '.png'));
 }
 cpSync('scripts/preview-index.html', 'preview/index.html');

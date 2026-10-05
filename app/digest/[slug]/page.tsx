@@ -4,7 +4,7 @@ import { Icon } from '@/components/Icon';
 import { rich } from '@/components/Rich';
 import { SitePage } from '@/components/SiteChrome';
 import { Eyebrow } from '@/components/Text';
-import { ARTICLES, findArticle, type Block } from '@/lib/insights';
+import { ARTICLES, findArticle, type Block } from '@/lib/digest';
 import { SITE_URL } from '@/lib/meta';
 
 export const dynamicParams = false;
@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const title = plain(a.title) + ' — System Switch';
   return {
     title, description: a.dek,
-    alternates: { canonical: '/insights/' + a.slug },
-    openGraph: { title, description: a.dek, url: SITE_URL + '/insights/' + a.slug, type: 'article', siteName: 'System Switch' },
+    alternates: { canonical: '/digest/' + a.slug },
+    openGraph: { title, description: a.dek, url: SITE_URL + '/digest/' + a.slug, type: 'article', siteName: 'System Switch' },
     ...(a.draft ? { robots: { index: false, follow: true } } : {})
   };
 }
@@ -56,7 +56,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <SitePage band="home">
       <article>
         <section className="s-sec s-sec-first s-phero"><div className="s-wrap s-center">
-          <div className="s-art-meta ss-label"><span>Insights</span><span className="ss-switch-mini is-on" aria-hidden="true" /><time>{rich(a.date)}</time><span className="ss-switch-mini is-on" aria-hidden="true" /><span>{a.readMins} min read</span></div>
+          <div className="s-art-meta ss-label"><span>Digest</span><span className="ss-switch-mini is-on" aria-hidden="true" /><time>{rich(a.date)}</time><span className="ss-switch-mini is-on" aria-hidden="true" /><span>{a.readMins} min read</span></div>
           <h1 className="s-h1">{rich(a.title)}</h1>
           <p className="ss-body-lg s-lede">{rich(a.dek)}</p>
           <div className="s-byline"><span className="s-quote-ph" aria-hidden="true">Photo</span><span><strong>Kyū</strong><span>Founder, System Switch</span></span></div>

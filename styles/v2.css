@@ -53,27 +53,76 @@ body:has(.s-v2) .s-head[data-scrolled] { background: var(--bg-canvas); border-bo
 .v2-forest .ss-cards-tile { background: var(--accent-fill); color: var(--on-accent); }
 @media (max-width: 767px) { .v2-forest .s-sec { padding: 72px 0; } }
 
-/* 4 · The system diagram. Ink = buying, hatched = waiting, gold = bought elsewhere (same code as the illustration). */
-.v2-sys { margin: var(--space-24) 0 0; padding: var(--space-12); background: var(--bg-raised); border: 1px solid var(--border-subtle); }
-.v2-sys-head { display: grid; justify-items: center; text-align: center; gap: var(--space-3); margin-bottom: var(--space-12); }
-.v2-sys-head .ss-h3 { margin: 0; }
+/* 4 · The system diagram, as a working board. Ink = buying, hatched = waiting, gold = bought elsewhere (same code as the illustration). */
+.v2-sys { margin: var(--space-24) 0 0; }
+.v2-sys-head { display: grid; justify-items: center; text-align: center; gap: var(--space-3); margin-bottom: var(--space-8); }
+.v2-sys-head .ss-h3 { margin: 0; font-size: 24px; line-height: 30px; letter-spacing: -.015em; }
 .v2-sys-k { color: var(--text-secondary); }
-.v2-sys-body { display: grid; justify-items: center; }
+
+.v2-board { position: relative; container-type: inline-size; aspect-ratio: 1000 / 500; padding-bottom: 0; border: 1px solid var(--border-strong);
+  background-color: var(--bg-sunken); background-image: radial-gradient(var(--border-strong) 1px, transparent 1.4px); background-size: 16px 16px; background-position: 8px 8px; overflow: hidden; }
+.v2-board-svg { position: absolute; left: 0; top: 0; width: 100%; height: calc(100% * 430 / 500); overflow: visible; }
+.v2-board-frame { position: absolute; left: 16px; top: 14px; display: flex; align-items: center; gap: 8px; font: 500 11px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--text-secondary); }
+.v2-board-glyph { width: 10px; height: 10px; border: 1px solid currentColor; position: relative; }
+.v2-board-glyph::before, .v2-board-glyph::after { content: ""; position: absolute; background: currentColor; }
+.v2-board-glyph::before { left: 2px; right: 2px; top: 4px; height: 1px; }
+.v2-board-glyph::after { top: 2px; bottom: 2px; left: 4px; width: 1px; }
+.bp-on { fill: none; stroke: var(--accent-text); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1s cubic-bezier(.6, 0, .2, 1) .35s; }
+.bp-off { fill: none; stroke: var(--text-secondary); stroke-width: 1.5; stroke-dasharray: 5 5; vector-effect: non-scaling-stroke; }
+.bp-note { fill: none; stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 2 3; vector-effect: non-scaling-stroke; }
+.bp-head-on { fill: var(--accent-text); }
+.bp-head-off { fill: var(--text-secondary); }
+.bp-port { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.bp-port-on { fill: var(--accent-text); stroke: var(--accent-text); }
+.bp-port-off { fill: var(--bg-sunken); stroke: var(--text-secondary); }
+.v2-sys.s-rv:not(.s-in) .bp-on { stroke-dashoffset: 1; }
+
+/* Nodes are placed on the 1000 × 470 grid (top = lane centre) and sized in container units so they scale with the board. */
+.v2-board .bn { position: absolute; transform: translateY(-50%); box-sizing: border-box; padding: 1.4cqi 1.8cqi; border: 1px solid var(--border-strong); background: var(--bg-raised);
+  font: 500 max(11px, 1.45cqi)/1.35 var(--font-sans); letter-spacing: -.005em; color: var(--text-primary); text-align: left; }
+.v2-board .bn strong { display: block; font-weight: 600; font-size: max(12px, 1.6cqi); }
+.v2-board .bn span:not(.bn-k):not(.bn-sel-tag):not(.v2-sw):not(.bn-nw) { display: block; margin-top: .3em; font-weight: 400; color: var(--text-secondary); font-size: max(10.5px, 1.3cqi); }
+.v2-board .bn .bn-nw { display: inline; margin: 0; white-space: nowrap; color: inherit; font: inherit; }
+.bn-k { display: block; margin-bottom: .45em; font: 500 max(9px, 1.05cqi)/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-text); }
+.bn-wait { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.2cqi; align-items: start; border-color: var(--text-primary); }
+.bn-wait .v2-sw { width: 1.6cqi; height: 1.6cqi; min-width: 12px; min-height: 12px; margin-top: .2em; }
+.bn-quiet { border-style: dashed; color: var(--text-secondary) !important; font-weight: 400 !important; background: transparent; }
+.bn-leak { background: var(--accent-fill) !important; border-color: var(--accent-fill) !important; color: var(--on-accent) !important; }
+.bn-note { background: var(--tint-accent) !important; border-color: transparent !important; font-weight: 400 !important; font-size: max(10.5px, 1.25cqi) !important; color: var(--text-primary); }
+.bn-note .bn-k { color: var(--text-secondary); }
+.bn-step { border-color: var(--text-primary); }
+.bn-now { background: var(--text-primary) !important; border-color: var(--text-primary) !important; color: var(--bg-canvas) !important; }
+/* The selected node, as in a design tool: outline, corner handles and a label. */
+.bn-sel { outline: 1px solid var(--focus); outline-offset: 5px; }
+.bn-sel .h { position: absolute; width: 7px; height: 7px; background: var(--bg-raised); border: 1px solid var(--focus); }
+.bn-sel .tl { left: -9px; top: -9px; } .bn-sel .tr { right: -9px; top: -9px; } .bn-sel .bl { left: -9px; bottom: -9px; } .bn-sel .br { right: -9px; bottom: -9px; }
+.bn-sel-tag { position: absolute; left: -6px; bottom: calc(100% + 12px); white-space: nowrap; padding: 4px 7px; background: var(--focus); color: var(--bg-raised); font: 500 max(9px, 1cqi)/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.v2-lane-tag { position: absolute; transform: translateY(-50%); font: 500 max(9.5px, 1.1cqi)/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text-secondary); }
+.v2-lane-tag.is-on { color: var(--text-primary); }
+/* A collaborator’s cursor, arriving after the connectors draw. */
+.v2-cursor { position: absolute; display: flex; align-items: flex-start; gap: 2px; pointer-events: none; transition: transform 1.1s cubic-bezier(.2, .7, .2, 1) 1.2s, opacity .4s ease 1.2s; }
+.v2-cursor svg { display: block; fill: var(--forest-900); stroke: var(--bg-raised); stroke-width: 1; }
+.v2-cursor span { margin-top: 14px; padding: 3px 6px; background: var(--forest-900); color: var(--linen); font: 500 11px/1 var(--font-mono); letter-spacing: .06em; }
+.v2-sys.s-rv:not(.s-in) .v2-cursor { transform: translate(14cqi, 8cqi); opacity: 0; }
+.v2-board-key { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 14px 16px; list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; border-top: 1px solid var(--border-strong); background: var(--bg-raised); font: 400 13px/18px var(--font-sans); color: var(--text-secondary); }
+.v2-board-key li { display: flex; align-items: center; gap: 8px; }
+.v2-board-key .v2-sw { margin: 0; }
+
+/* Stacked version for narrow screens. */
+.v2-sys-body.v2-stacked { display: none; }
+.v2-sys-body { display: grid; justify-items: center; padding: var(--space-8) var(--space-4) var(--space-6); border: 1px solid var(--border-strong); background-color: var(--bg-sunken); background-image: radial-gradient(var(--border-strong) 1px, transparent 1.4px); background-size: 16px 16px; }
 .v2-node { box-sizing: border-box; width: 100%; max-width: 320px; padding: var(--space-4) var(--space-6); border: 1px solid var(--text-primary); font: 500 15px/1.4 var(--font-sans); text-align: left; background: var(--bg-raised); }
 .v2-node strong { display: block; font: 600 16px/22px var(--font-sans); }
 .v2-node p { margin: var(--space-1) 0 0; font: 400 14px/21px var(--font-sans); color: var(--text-secondary); }
 .v2-sys-in { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: var(--space-3); align-items: start; max-width: 380px; }
-.v2-node-quiet { border-style: dashed; border-color: var(--border-strong); color: var(--text-secondary); font-weight: 400; }
+.v2-node-quiet { border-style: dashed; border-color: var(--border-strong); color: var(--text-secondary); font-weight: 400; background: transparent; }
 .v2-node-leak { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--on-accent); }
 .v2-node-step { display: grid; gap: 6px; }
+.v2-node-sel { outline: 1px solid var(--focus); outline-offset: 4px; }
 .v2-step-n { font: 500 11px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-text); }
 .v2-node-now { background: var(--text-primary); border-color: var(--text-primary); color: var(--bg-canvas); }
-/* Fork: a stub down from the input, then a rule across to the centre of each lane. Lanes have no gap, so centres sit at 25% and 75%. */
-.v2-fork { position: relative; width: 100%; height: 32px; }
-.v2-fork::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: var(--text-primary); }
-.v2-fork::after { content: ""; position: absolute; left: 25%; right: 25%; bottom: 0; height: 1px; background: var(--text-primary); }
-.v2-lanes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
-.v2-lane { display: grid; justify-items: center; align-content: start; padding: 0 var(--space-6); }
+.v2-lanes { display: grid; grid-template-columns: 1fr; gap: var(--space-8); width: 100%; }
+.v2-lane { display: grid; justify-items: center; align-content: start; }
 .v2-lane::before { content: ""; width: 1px; height: 24px; background: var(--text-primary); }
 .v2-lane-off::before { background: var(--border-strong); }
 .v2-lane-k { margin: var(--space-3) 0 var(--space-4); color: var(--text-secondary); }
@@ -85,19 +134,14 @@ body:has(.s-v2) .s-head[data-scrolled] { background: var(--bg-canvas); border-bo
 .v2-sw-now { background: var(--text-primary); }
 .v2-sw-wait { background-color: var(--bg-canvas); background-image: repeating-linear-gradient(135deg, var(--accent-text) 0 1px, transparent 1px 7px); border: 1px solid var(--text-primary); }
 .v2-sw-leak { background: var(--accent-fill); }
-.v2-legend { list-style: none; margin: var(--space-12) 0 0; padding: var(--space-6) 0 0; border-top: 1px solid var(--border-subtle); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3) var(--space-8); font: 400 14px/21px var(--font-sans); color: var(--text-secondary); }
+.v2-legend { list-style: none; margin: var(--space-8) 0 0; padding: var(--space-6) 0 0; width: 100%; border-top: 1px solid var(--border-strong); display: flex; flex-direction: column; gap: var(--space-3); font: 400 14px/21px var(--font-sans); color: var(--text-secondary); }
 .v2-legend li { display: flex; gap: var(--space-2); align-items: center; }
 .v2-legend .v2-sw { margin-top: 0; }
-@media (max-width: 767px) {
-  .v2-sys { margin-top: var(--space-16); padding: var(--space-8) var(--space-4); }
-  .v2-fork { display: none; }
-  .v2-lanes { grid-template-columns: 1fr; gap: var(--space-8); }
-  .v2-lane { padding: 0; }
-  .v2-legend { justify-content: flex-start; flex-direction: column; }
+@media (max-width: 900px) {
+  .v2-board { display: none; }
+  .v2-sys-body.v2-stacked { display: grid; }
+  .v2-sys { margin-top: var(--space-16); }
 }
-
-/* The portrait placeholder disappears on the sunken founder section; lift it to the canvas tone. */
-.s-v2 .s-sunk .s-portrait { background: var(--bg-canvas); }
 
 /* 3 · Leak calculator: the illustration panel with inputs. Sliders carry the switch-knob motif. */
 .v2-calc { max-width: none; }
@@ -146,3 +190,8 @@ body:has(.s-v2) .s-head[data-scrolled] { background: var(--bg-canvas); border-bo
 .v2-proof-head { display: grid; gap: var(--space-8); justify-items: start; }
 .v2-proof-links { display: flex; gap: var(--space-8); flex-wrap: wrap; }
 .s-v2 .v2-split + .s-stats { margin-top: var(--space-12); }
+
+/* Diagnosis: the headline runs the full width (two lines), and the reading column sits under it on the right. */
+.v2-h-wide { max-width: 1040px; margin-bottom: var(--space-12); }
+.v2-offset { align-items: start; }
+@media (max-width: 900px) { .v2-offset > div:first-child { display: none; } .v2-h-wide { margin-bottom: var(--space-8); } }

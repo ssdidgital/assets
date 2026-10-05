@@ -6,5 +6,5 @@ export const contentType = ogContentType;
 export const alt = 'System Switch';
 
 export default function Image() {
-  return ogImage('Insights', 'Notes from {{the closer’s seat.}}');
+  return ogImage('Digest', 'Notes from {{the closer’s seat.}}');
 }

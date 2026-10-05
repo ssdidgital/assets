@@ -7,23 +7,17 @@ import { Faq } from './Faq';
 
 // Homepage sections. Copy is verbatim from design/design-reference/SiteHome.jsx.txt.
 
-function HeroLede() {
-  // "Split" format, the prototype's default (TWEAK_DEFAULTS in Site.html): 21px / 17px, 640px wide.
-  return (
-    <div className="s-lede-split" style={{ maxWidth: 640 }}>
-      <p className="s-lede-a">System Switch is a growth infrastructure firm for founder-led coaches, consultants and service providers.</p>
-      <p className="s-lede-b">We find where revenue is leaking, install the systems that stop it, and hand you the controls.</p>
-    </div>
-  );
-}
-
 export function HHero() {
   return (
     <section className="s-dots s-hero">
       <div className="s-wrap s-center">
-        <Eyebrow>Growth infrastructure for founder-led businesses</Eyebrow>
-        <h1 className="s-hero-h">We engineer the systems that win clients, and <Em>win back the buyers you’ve already paid for.</Em></h1>
-        <HeroLede />
+        <h1 className="s-hero-h"><span>We engineer the systems that win clients,</span> <span>and <Em>win back the buyers you’ve already paid for.</Em></span></h1>
+        <p className="s-hero-pos">System Switch is a growth infrastructure firm for founder-led coaches, consultants and service providers.</p>
+        <ol className="s-hero-steps">
+          <li><span className="s-qn">01</span>We find where revenue is leaking</li>
+          <li><span className="s-qn">02</span>We install the systems that stop it</li>
+          <li><span className="s-qn">03</span>We hand you the controls</li>
+        </ol>
         <div className="s-ctas">
           <BookButton />
           <Button variant="ghost" href="#how">See how we work →</Button>
@@ -98,7 +92,7 @@ export function HBuild() {
   return (
     <section className="s-sec"><div className="s-wrap s-center">
       <Eyebrow>What we build</Eyebrow>
-      <h2 className="s-h2">Four stages of revenue.<br />We start <Em>where the leak is biggest.</Em></h2>
+      <h2 className="s-h2">Four stages of revenue.<br />We start <Em>where the leak is&nbsp;biggest.</Em></h2>
       <div className="s-rows">{rows.map(([i, t, d, tag], n) => (
         <div className="s-row" key={t}>
           <div className="s-row-body">

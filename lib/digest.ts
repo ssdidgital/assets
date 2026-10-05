@@ -1,4 +1,4 @@
-// Founder essays. The sample below is assembled only from copy already on the site, as a layout reference;
+// Digest: founder essays. The sample below is assembled only from copy already on the site, as a layout reference;
 // it stays a draft (noindex, out of the sitemap) until replaced with a real essay. Markup: {{gold}}, [[to supply]], **bold**.
 
 export type Block =

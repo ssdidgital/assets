@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { BookButton, Button } from './Button';
-import { Em, Ph } from './Text';
+import { Em } from './Text';
 
 export const NAV: [href: string, label: string][] = [
   ['/approach', 'Approach'],
@@ -48,9 +48,8 @@ type FootLink = [kind: 'go' | 'a', href: string, label: string];
 
 export function SiteFooter() {
   const cols: [string, FootLink[]][] = [
-    ['Company', [...NAV, ['/work', 'Work'], ['/insights', 'Insights'], ['/start', 'Book a systems audit']].map(([k, l]): FootLink => ['go', k, l])],
-    ['Contact', [['a', 'mailto:support@systemswitch.digital', 'support@systemswitch.digital'], ['a', '#', 'LinkedIn']]],
-    ['Legal', [['go', '/privacy', 'Privacy policy'], ['go', '/terms', 'Terms']]]
+    ['Company', [['go', '/approach', 'Approach'], ['go', '/about', 'About'], ['go', '/work', 'Work'], ['go', '/digest', 'Digest']]],
+    ['Legal', [['go', '/company', 'System Switch'], ['go', '/privacy', 'Privacy policy'], ['go', '/terms', 'Terms and conditions']]]
   ];
   return (
     <footer data-theme="forest" className="s-foot">
@@ -68,7 +67,7 @@ export function SiteFooter() {
           ))}</div>
         </div>
         <div className="s-foot-legal">
-          <span>© 2026 System Switch Digital · <Ph>[[company number and registered office]]</Ph></span>
+          <span>© 2026 System Switch Digital</span>
           <nav aria-label="Social"><a href="#">LinkedIn</a></nav>
         </div>
       </div>

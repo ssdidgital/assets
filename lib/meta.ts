@@ -13,9 +13,10 @@ const META = {
   // New pages (draft copy, not from the prototype).
   work: ['Work — System Switch', 'What we built for founder-led businesses, and what it collected.'],
   sample: ['Sample systems audit — System Switch', 'A redacted example of the write-up that follows a systems audit.'],
-  insights: ['Insights — System Switch', 'Notes from the closer’s seat on follow-up, recovery and growth infrastructure.'],
+  digest: ['Digest — System Switch', 'Notes from the closer’s seat on follow-up, recovery and growth infrastructure.'],
   privacy: ['Privacy policy — System Switch', 'How System Switch Digital collects and uses personal data.'],
-  terms: ['Terms — System Switch', 'The terms for using this website.']
+  terms: ['Terms and conditions — System Switch', 'The terms for using this website and booking a systems audit.'],
+  company: ['System Switch — company details', 'Registered company details for System Switch Digital.']
 } as const;
 
 export function pageMeta(page: keyof typeof META, path: string, opts: { index?: boolean } = {}): Metadata {

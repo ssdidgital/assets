@@ -18,12 +18,13 @@ export function V2Hero() {
   return (
     <section className="s-dots s-hero">
       <div className="s-wrap s-center">
-        <Eyebrow>Growth infrastructure for founder-led businesses</Eyebrow>
-        <h1 className="s-hero-h">We engineer the systems that win clients, and <Em>win back the buyers you’ve already paid for.</Em></h1>
-        <div className="s-lede-split" style={{ maxWidth: 640 }}>
-          <p className="s-lede-a">System Switch is a growth infrastructure firm for founder-led coaches, consultants and service providers.</p>
-          <p className="s-lede-b">We find where revenue is leaking, install the systems that stop it, and hand you the controls.</p>
-        </div>
+        <h1 className="s-hero-h"><span>We engineer the systems that win clients,</span> <span>and <Em>win back the buyers you’ve already paid for.</Em></span></h1>
+        <p className="s-hero-pos">System Switch is a growth infrastructure firm for founder-led coaches, consultants and service providers.</p>
+        <ol className="s-hero-steps">
+          <li><span className="s-qn">01</span>We find where revenue is leaking</li>
+          <li><span className="s-qn">02</span>We install the systems that stop it</li>
+          <li><span className="s-qn">03</span>We hand you the controls</li>
+        </ol>
         <div className="s-ctas">
           <BookButton />
           <Button variant="ghost" href="#how">See how we work →</Button>
@@ -58,8 +59,9 @@ export function V2Diagnosis() {
   return (
     <section className="s-sec s-sunk" id="diagnosis"><div className="s-wrap">
       <SecIndex n="02">What the CRM won’t tell you</SecIndex>
-      <div className="v2-split">
-        <h2 className="s-h2 v2-h">Most businesses think they need more leads. <Em><br />They’re leaking the ones they have.</Em></h2>
+      <h2 className="s-h2 v2-h v2-h-wide">Most businesses think they need more leads. <Em><br />They’re leaking the ones they have.</Em></h2>
+      <div className="v2-split v2-offset">
+        <div aria-hidden="true" />
         <div className="s-read ss-body v2-read">
           <p>Every month, people raise their hand. They book a call, watch the training, ask about price. Then the timing’s wrong, and they say “not now”.<br />The team moves on to this week’s enquiries, and everyone from last month goes quiet in the CRM.</p>
           <p>Many of them still buy, eventually. From whoever followed up.</p>
@@ -88,7 +90,7 @@ export function V2Build() {
       <SecIndex n="03">What we build</SecIndex>
       <div className="v2-split">
         <div className="v2-sticky">
-          <h2 className="s-h2 v2-h">Four stages of revenue.<br />We start <Em>where the leak is biggest.</Em></h2>
+          <h2 className="s-h2 v2-h">Four stages of revenue.<br />We start <Em>where the leak is&nbsp;biggest.</Em></h2>
           <p className="ss-body-lg v2-after">Revenue moves through all four. Most businesses only ever invest in the first. The fastest return is usually further down.</p>
         </div>
         <div className="s-rows v2-rows">{rows.map(([i, t, d, tag], n) => (
