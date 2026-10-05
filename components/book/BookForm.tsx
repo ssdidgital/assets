@@ -50,7 +50,9 @@ export function BookForm() {
     setBusy(true);
     await submitApplication(v);
     clearDraft();
-    router.push('/start/calendar');
+    // Review hosting (scripts/preview.mjs) can take over navigation; the live site uses the router.
+    const pv = (window as Window & { __PV_NAV__?: (path: string) => void }).__PV_NAV__;
+    if (pv) pv('/start/calendar'); else router.push('/start/calendar');
   };
   let n = 0;
   return (
