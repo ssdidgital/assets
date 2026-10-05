@@ -15,3 +15,10 @@ button, input, select, textarea { font: inherit; color: inherit; border-radius: 
 [data-theme="forest"] ::selection { background: var(--gold-500); color: var(--forest-900); }
 html { hanging-punctuation: first last; }
 p, li { text-wrap: pretty; }
+
+/* Signature motif: the switch from the primary button, at small scale. Track in light green, gold knob; .is-on slides it across. */
+.ss-switch-mini { position: relative; display: inline-block; flex: none; width: 18px; height: 6px; background: var(--forest-300); overflow: hidden; vertical-align: middle; }
+[data-theme="forest"] .ss-switch-mini { background: var(--forest-600); }
+.ss-switch-mini::before { content: ""; position: absolute; left: 0; top: 0; width: 9px; height: 6px; background: var(--gold-500); transition: transform .3s cubic-bezier(.6, 0, .2, 1); }
+.ss-switch-mini.is-on::before { transform: translateX(9px); }
+@media (prefers-reduced-motion: reduce) { .ss-switch-mini::before { transition: none; } }

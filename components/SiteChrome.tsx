@@ -48,9 +48,9 @@ type FootLink = [kind: 'go' | 'a', href: string, label: string];
 
 export function SiteFooter() {
   const cols: [string, FootLink[]][] = [
-    ['Company', [...NAV, ['/start', 'Book a systems audit'] as [string, string]].map(([k, l]): FootLink => ['go', k, l])],
+    ['Company', [...NAV, ['/work', 'Work'], ['/insights', 'Insights'], ['/start', 'Book a systems audit']].map(([k, l]): FootLink => ['go', k, l])],
     ['Contact', [['a', 'mailto:support@systemswitch.digital', 'support@systemswitch.digital'], ['a', '#', 'LinkedIn']]],
-    ['Legal', [['a', '#', 'Privacy policy'], ['a', '#', 'Terms']]]
+    ['Legal', [['go', '/privacy', 'Privacy policy'], ['go', '/terms', 'Terms']]]
   ];
   return (
     <footer data-theme="forest" className="s-foot">

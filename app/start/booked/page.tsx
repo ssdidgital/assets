@@ -1,6 +1,6 @@
 import { Icon } from '@/components/Icon';
 import { SitePage } from '@/components/SiteChrome';
-import { Em } from '@/components/Text';
+import { BookedHeading } from '@/components/book/BookedHeading';
 import { pageMeta } from '@/lib/meta';
 
 export const metadata = pageMeta('start', '/start/booked', { index: false });
@@ -11,8 +11,7 @@ export default function Booked() {
   return (
     <SitePage>
       <section className="s-sec s-sec-first"><div className="s-wrap s-center">
-        <h1 className="s-h2" style={{ marginTop: 0 }}>You’re <Em>booked in.</Em></h1>
-        <p className="ss-body-lg s-lede">Your confirmation and a calendar invite are on their way to your inbox. If you can’t find them, check your spam folder and save our address.</p>
+        <BookedHeading />
         <div className="s-prep">
           <h2 className="ss-h3" style={{ margin: 0 }}>Before we speak</h2>
           <ul className="s-list ss-body">{prep.map((p) => <li key={p}><Icon name="check" size={20} /><span>{p}</span></li>)}</ul>

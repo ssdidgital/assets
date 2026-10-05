@@ -1,4 +1,5 @@
 import { BookForm } from '@/components/book/BookForm';
+import { LeakNote } from '@/components/book/LeakNote';
 import { NextPanel } from '@/components/book/NextPanel';
 import { SitePage } from '@/components/SiteChrome';
 import { Em } from '@/components/Text';
@@ -17,6 +18,7 @@ export default function Start() {
             <p>Tell us a little about your business. It takes about three minutes, and it means the call is about you from the first minute.</p>
             <p>If we can help, we’ll show you where we’d start. If we can’t, we’ll tell you, and point you somewhere better if we know of somewhere.</p>
           </div>
+          <LeakNote />
           <BookForm />
         </div>
         <NextPanel step={0} />

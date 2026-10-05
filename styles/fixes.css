@@ -14,3 +14,22 @@
 
 /* The calendar placeholder is a link here (a button in the prototype); drop the default underline. */
 .s-cal { text-decoration: none; }
+
+/* Leak-calculator estimate carried onto /start. */
+.v2-leaknote { margin: var(--space-8) 0 0; padding: var(--space-4) var(--space-6); max-width: 640px; border: 1px solid var(--border-subtle); background: var(--bg-raised); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.v2-leaknote strong { color: var(--text-primary); font-weight: 600; }
+
+/* "What happens next": the switch marks completed and current steps. */
+.s-next li { grid-template-columns: 32px minmax(0, 1fr) auto; align-items: center; column-gap: var(--space-3); }
+.s-next li .ss-switch-mini { opacity: .35; }
+.s-next li .ss-switch-mini.is-on { opacity: 1; }
+
+/* Submit loading state: the knob shuttles while the application is handed on. */
+.s .s-busy { cursor: progress; opacity: 1 !important; }
+.s .s-busy .ss-btn-switch::before { animation: ss-knob .6s cubic-bezier(.6, 0, .2, 1) infinite alternate; }
+@keyframes ss-knob { from { transform: none; } to { transform: translateX(9px); } }
+@media (prefers-reduced-motion: reduce) { .s .s-busy .ss-btn-switch::before { animation: none; } }
+
+/* Personalised line on /start/booked. */
+.s-booked-start { margin: var(--space-6) 0 0; max-width: 640px; padding: var(--space-4) var(--space-6); border: 1px solid var(--border-subtle); background: var(--bg-raised); text-wrap: pretty; }
+.s-booked-start strong { font-weight: 600; color: var(--accent-text); }

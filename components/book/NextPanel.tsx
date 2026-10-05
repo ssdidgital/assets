@@ -4,7 +4,7 @@ export function NextPanel({ step }: { step: 0 | 1 }) {
   return (
     <aside className="s-next">
       <span className="ss-label">What happens next</span>
-      <ol>{rows.map((r, i) => <li key={r} aria-current={i === step ? 'step' : undefined}><span className="s-qn">{String(i + 1).padStart(2, '0')}</span>{r}</li>)}</ol>
+      <ol>{rows.map((r, i) => <li key={r} aria-current={i === step ? 'step' : undefined}><span className="s-qn">{String(i + 1).padStart(2, '0')}</span><span>{r}</span><span className={'ss-switch-mini' + (i <= step ? ' is-on' : '')} aria-hidden="true" /></li>)}</ol>
     </aside>
   );
 }

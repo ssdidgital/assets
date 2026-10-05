@@ -5,7 +5,11 @@ import { Faq } from '../home/Faq';
 import { Icon, type IconName } from '../Icon';
 import { Em, Eyebrow, Ph } from '../Text';
 import { SecIndex } from './SecIndex';
+import { LeakCalculator } from './LeakCalculator';
 import { SystemDiagram } from './SystemDiagram';
+import { StatStrip } from '../work/StatStrip';
+import { Testimonial } from '../work/Testimonial';
+import { CASE_STUDIES } from '@/lib/work';
 
 // Homepage v2: same copy as components/home/sections.tsx, with varied layouts, mono section indexes,
 // a Forest "How we work" band and the system diagram. Styles live in styles/v2.css, scoped to .s-v2.
@@ -51,11 +55,6 @@ export function V2Router() {
 }
 
 export function V2Diagnosis() {
-  const segs: [string, number, string, string][] = [
-    ['now', 24, 'Bought straight away.', 'The part most businesses measure and optimise.'],
-    ['wait', 44, 'Said “not now”.', 'Interested, qualified, and left in the CRM.'],
-    ['leak', 32, 'Bought later, elsewhere.', 'Revenue the business paid to create and never collected.']
-  ];
   return (
     <section className="s-sec s-sunk" id="diagnosis"><div className="s-wrap">
       <SecIndex n="02">What the CRM won’t tell you</SecIndex>
@@ -66,19 +65,7 @@ export function V2Diagnosis() {
           <p>Many of them still buy, eventually. From whoever followed up.</p>
         </div>
       </div>
-      <div className="s-illo">
-        <span className="ss-label s-illo-k">Illustration</span>
-        <h3 className="ss-h3 s-illo-h"><Em>Twelve months</Em> of enquiries</h3>
-        <div className="s-bar-wrap">
-          <div className="s-bar" role="img" aria-label="An illustrative bar: a small share bought straight away, the largest share said not now, and a large share bought later from someone else.">
-            {segs.map(([c, w]) => <span key={c} className={'s-seg s-seg-' + c} style={{ flexGrow: w }}></span>)}
-          </div>
-          <div className="s-key">{segs.map(([c, w, l, d]) => (
-            <div key={c} className={'s-key-i s-key-' + c} style={{ flexGrow: w }}><strong>{l}</strong><p>{d}</p></div>
-          ))}</div>
-        </div>
-        <p className="ss-caption s-illo-note">Proportions are illustrative. On a first call, we find the real ones for your business.</p>
-      </div>
+      <LeakCalculator />
       <div className="v2-split v2-close">
         <p className="v2-statement">We measure growth by what a business keeps.</p>
         <div className="s-read ss-body v2-read">
@@ -147,7 +134,7 @@ export function V2Fit() {
   const not = ["You’re still finding your offer or your first clients.", "You’re looking for cheap leads or a quick campaign.", "You’d rather not look at the numbers."];
   return (
     <section className="s-sec"><div className="s-wrap s-center">
-      <SecIndex n="05">Who it’s for</SecIndex>
+      <SecIndex n="06">Who it’s for</SecIndex>
       <h2 className="s-h2" style={{ marginTop: 0, maxWidth: 900 }}>Built for founder-led businesses that have <Em>proven their model.</Em></h2>
       <div className="s-fit">
         <div><h3 className="ss-h3" style={{ margin: 0 }}>A good fit if:</h3><ul className="s-list ss-body">{good.map((g) => <li key={g}><Icon name="check" size={20} /><span>{g}</span></li>)}</ul></div>
@@ -160,7 +147,7 @@ export function V2Fit() {
 export function V2Founder() {
   return (
     <section className="s-sec s-sunk"><div className="s-wrap">
-      <SecIndex n="06">The founder</SecIndex>
+      <SecIndex n="07">The founder</SecIndex>
       <div className="s-founder">
         <div className="s-portrait"><span className="ss-label">Portrait — 4:5, professional</span></div>
         <div className="s-founder-text">
@@ -177,7 +164,7 @@ export function V2Founder() {
 export function V2Faq() {
   return (
     <section className="s-sec"><div className="s-wrap">
-      <SecIndex n="07">Before you book</SecIndex>
+      <SecIndex n="08">Before you book</SecIndex>
       <div className="s-faqwrap">
         <div className="s-faq-head">
           <h2 className="s-h2 s-faq-h" style={{ marginTop: 0 }}>What to expect from <Em>a systems audit.</Em></h2>
@@ -190,6 +177,27 @@ export function V2Faq() {
           ['Do you work with businesses outside the UK?', 'Yes. We work with founder-led businesses in the UK, the US, Canada and Australia.']
         ]} />
       </div>
+    </div></section>
+  );
+}
+
+// Proof slot: the best numbers and a named quote, from lib/work.ts. Placeholders until real results are in.
+export function V2Proof() {
+  const c = CASE_STUDIES[0];
+  return (
+    <section className="s-sec s-sunk"><div className="s-wrap">
+      <SecIndex n="05">Results</SecIndex>
+      <div className="v2-split">
+        <div className="v2-proof-head">
+          <h2 className="s-h2 v2-h">What the system <Em>brought back.</Em></h2>
+          <div className="v2-proof-links">
+            <Button variant="ghost" href="/work">See the work →</Button>
+            <Button variant="ghost" href="/work/sample-audit">See a sample audit →</Button>
+          </div>
+        </div>
+        {c.quote ? <Testimonial q={c.quote} /> : null}
+      </div>
+      <StatStrip stats={c.stats} />
     </div></section>
   );
 }

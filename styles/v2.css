@@ -20,19 +20,19 @@ body:has(.s-v2) .s-head[data-scrolled] { background: var(--bg-canvas); border-bo
 /* 5 · Mono section index in place of the boxed eyebrow. */
 .v2-idx { display: flex; align-items: center; gap: var(--space-3); justify-self: stretch; width: 100%; margin-bottom: var(--space-12); font: 500 12px/1 var(--font-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--text-secondary); text-align: left; }
 .v2-idx-n { color: var(--accent-text); }
-.v2-idx-dash { color: var(--border-strong); letter-spacing: 0; }
+
 .v2-idx::after { content: ""; flex: 1; height: 1px; background: var(--border-strong); margin-left: var(--space-3); }
 
 /* 1 · Split layouts: heading left, reading column right. */
 .v2-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-16); align-items: start; text-align: left; }
-.s-v2 .v2-h { margin: 0; max-width: none; text-align: left; }
-.s-v2 .v2-read { margin-top: 0; max-width: 620px; padding-top: 6px; }
+.v2-h { margin: 0; max-width: none; text-align: left; }
+.v2-read { margin-top: 0; max-width: 620px; padding-top: 6px; }
 .s-v2 .v2-split + .s-illo { max-width: none; margin-top: var(--space-16); }
 .v2-close { margin-top: var(--space-24); padding-top: var(--space-12); border-top: 1px solid var(--border-strong); align-items: end; }
 .v2-statement { margin: 0; font: 600 clamp(32px, 3.4vw, 48px)/1.05 var(--font-sans); letter-spacing: -.035em; text-wrap: balance; color: var(--text-primary); }
 .v2-sticky { position: sticky; top: 120px; display: grid; gap: var(--space-8); }
 .v2-after { margin: 0; color: var(--text-secondary); max-width: 440px; text-wrap: pretty; }
-.s-v2 .v2-rows { margin-top: 0; max-width: none; }
+.v2-rows { margin-top: 0; max-width: none; }
 .s-v2 .s-founder { gap: var(--space-16); }
 .s-v2 .s-faqwrap .s-faq-h { margin-top: 0; }
 @media (max-width: 900px) {
@@ -98,3 +98,51 @@ body:has(.s-v2) .s-head[data-scrolled] { background: var(--bg-canvas); border-bo
 
 /* The portrait placeholder disappears on the sunken founder section; lift it to the canvas tone. */
 .s-v2 .s-sunk .s-portrait { background: var(--bg-canvas); }
+
+/* 3 · Leak calculator: the illustration panel with inputs. Sliders carry the switch-knob motif. */
+.v2-calc { max-width: none; }
+.v2-calc-in { width: 100%; margin-top: var(--space-8); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-8); text-align: left; }
+.v2-calc-f { display: grid; gap: var(--space-2); align-content: start; }
+.v2-calc-row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); }
+.v2-calc-l { font: 500 14px/20px var(--font-sans); color: var(--text-primary); }
+.v2-calc-v { font: 500 15px/20px var(--font-mono); font-variant-numeric: tabular-nums; color: var(--accent-text); white-space: nowrap; }
+.v2-calc-help { font: 400 13px/18px var(--font-sans); color: var(--text-secondary); }
+.v2-range { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; margin: 0; background: transparent; cursor: pointer; }
+.v2-range::-webkit-slider-runnable-track { height: 6px; background: linear-gradient(to right, var(--text-primary) var(--p), var(--border-strong) var(--p)); }
+.v2-range::-moz-range-track { height: 6px; background: var(--border-strong); }
+.v2-range::-moz-range-progress { height: 6px; background: var(--text-primary); }
+.v2-range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 12px; margin-top: -3px; border: 0; border-radius: 0; background: var(--accent-fill); }
+.v2-range::-moz-range-thumb { width: 20px; height: 12px; border: 0; border-radius: 0; background: var(--accent-fill); }
+.v2-range:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.v2-cur { display: inline-flex; margin-top: var(--space-2); border: 1px solid var(--border-input); justify-self: start; }
+.v2-cur button { background: none; border: 0; padding: 6px 10px; font: 500 11px/1 var(--font-mono); letter-spacing: .12em; color: var(--text-secondary); cursor: pointer; }
+.v2-cur button + button { border-left: 1px solid var(--border-input); }
+.v2-cur button[aria-checked="true"] { background: var(--text-primary); color: var(--bg-canvas); }
+.v2-cur button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.s-v2 .v2-calc .s-bar-wrap { margin-top: var(--space-12); }
+.v2-calc-bar { transition: grid-template-columns .45s cubic-bezier(.2, .7, .2, 1); }
+.v2-calc-pc { display: block; margin-bottom: var(--space-2); font: 500 13px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.v2-calc-out { margin-top: var(--space-12); padding-top: var(--space-8); border-top: 1px solid var(--border-subtle); width: 100%; display: grid; justify-items: center; gap: var(--space-4); text-align: center; }
+.v2-calc-big { margin: 0; max-width: 760px; font: 600 clamp(26px, 2.6vw, 36px)/1.15 var(--font-sans); letter-spacing: -.03em; text-wrap: balance; font-variant-numeric: tabular-nums; }
+.v2-calc-sub { margin: 0 0 var(--space-4); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+@media (max-width: 1000px) { .v2-calc-in { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) {
+  .v2-calc-in { grid-template-columns: 1fr; gap: var(--space-6); }
+  .s-v2 .v2-calc .s-key { grid-template-columns: 1fr !important; }
+  .v2-calc-out { margin-top: var(--space-8); }
+}
+
+/* 6 · Motif on v2: section-index switches flip on as each section is revealed (final state is on, so no-JS and reduced motion show it on). */
+.v2-idx .ss-switch-mini::before { transform: translateX(9px); transition-delay: .45s; }
+.v2-idx.s-rv:not(.s-in) .ss-switch-mini::before { transform: none; }
+/* FAQ: the plus becomes the switch; open = on. */
+.s-v2 .s-plus { width: 22px; height: 8px; background: var(--forest-300); overflow: hidden; transform: none !important; }
+.s-v2 .s-plus::after { display: none; }
+.s-v2 .s-plus::before { top: 0; left: 0; width: 11px; height: 8px; background: var(--gold-500); transition: transform .3s cubic-bezier(.6, 0, .2, 1); }
+.s-v2 .s-on .s-plus::before { transform: translateX(11px); }
+.s-v2 .s-faq-i button:hover .s-plus { background: var(--forest-400); }
+
+/* Results slot. */
+.v2-proof-head { display: grid; gap: var(--space-8); justify-items: start; }
+.v2-proof-links { display: flex; gap: var(--space-8); flex-wrap: wrap; }
+.s-v2 .v2-split + .s-stats { margin-top: var(--space-12); }

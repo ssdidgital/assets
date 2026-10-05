@@ -1,3 +1,5 @@
+import { readLeak } from './leak';
+
 // The 12 audit-application questions. Copy is verbatim from design/design-reference/SiteBook.jsx.txt.
 
 export type Question = {
@@ -46,5 +48,45 @@ export const APPLICATION_KEY = 'ssd-application';
  * calendar step can prefill the booking widget. Wire the CRM (e.g. GoHighLevel) POST here.
  */
 export async function submitApplication(v: Answers): Promise<void> {
-  try { sessionStorage.setItem(APPLICATION_KEY, JSON.stringify(v)); } catch { /* storage blocked: nothing to keep */ }
+  // The visitor’s leak-calculator inputs travel with the application, if they used it.
+  const payload = { ...v, leakEstimate: readLeak() };
+  try { sessionStorage.setItem(APPLICATION_KEY, JSON.stringify(payload)); } catch { /* storage blocked: nothing to keep */ }
+}
+
+export function readApplication(): (Answers & { leakEstimate?: unknown }) | null {
+  try { return JSON.parse(sessionStorage.getItem(APPLICATION_KEY) || 'null'); } catch { return null; }
+}
+
+export const DRAFT_KEY = 'ssd-application-draft';
+
+/**
+ * Keeps an unfinished application for this visit, so a reload or a step back doesn’t lose it.
+ * Abandoned-form follow-up hooks in here: once the visitor has given an email (and consent, per your privacy policy),
+ * post the partial answers to the CRM so its “pick up where you left off” email can fire (template: emails/abandoned.html).
+ */
+export function saveDraft(v: Answers) {
+  try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify(v)); } catch { /* storage blocked */ }
+}
+
+export function readDraft(): Answers {
+  try { return JSON.parse(sessionStorage.getItem(DRAFT_KEY) || '{}') || {}; } catch { return {}; }
+}
+
+export function clearDraft() {
+  try { sessionStorage.removeItem(DRAFT_KEY); } catch { /* storage blocked */ }
+}
+
+// Q9 (“Where do you feel the business is losing the most?”) mapped, by option order, to the stage the call starts with.
+const STAGE_BY_LOSING: ([stage: string, what: string] | null)[] = [
+  ['Acquisition', 'the front end that brings in the right people'],
+  ['Conversion', 'the follow-up that turns this week’s enquiries into booked calls'],
+  ['Recovery', 'the buyers already sitting in your list'],
+  ['Retention', 'the clients who could stay, buy again and send people your way'],
+  null
+];
+
+export function startingStage(losing?: string) {
+  const q = BOOK_SECTIONS.flatMap((s) => s.qs).find((x) => x.id === 'losing');
+  const i = losing && q?.opts ? q.opts.indexOf(losing) : -1;
+  return i >= 0 ? STAGE_BY_LOSING[i] : null;
 }

@@ -1,8 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { BOOK_SECTIONS, missingAnswers, submitApplication, type Answers, type Question } from '@/lib/booking';
+import { useEffect, useRef, useState } from 'react';
+import { BOOK_SECTIONS, clearDraft, missingAnswers, readDraft, saveDraft, submitApplication, type Answers, type Question } from '@/lib/booking';
 import { Button } from '../Button';
 import { Field } from '../Field';
 
@@ -38,12 +38,18 @@ export function BookForm() {
   const router = useRouter();
   const [v, setV] = useState<Answers>({});
   const [errs, setErrs] = useState<Set<string> | null>(null);
+  const [busy, setBusy] = useState(false);
+  const restored = useRef(false);
+  useEffect(() => { setV(readDraft()); restored.current = true; }, []);
+  useEffect(() => { if (restored.current) saveDraft(v); }, [v]);
   const set = (id: string) => (val: string) => setV((s) => ({ ...s, [id]: val }));
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const bad = missingAnswers(v);
     if (bad.length) { setErrs(new Set(bad)); window.scrollTo({ top: 0 }); return; }
+    setBusy(true);
     await submitApplication(v);
+    clearDraft();
     router.push('/start/calendar');
   };
   let n = 0;
@@ -63,7 +69,7 @@ export function BookForm() {
           })}
         </section>
       ))}
-      <div><Button variant="primary" type="submit">Choose a time →</Button></div>
+      <div><Button variant="primary" type="submit" className={'s-blink' + (busy ? ' s-busy' : '')} aria-busy={busy || undefined} disabled={busy}>Choose a time →</Button></div>
     </form>
   );
 }
