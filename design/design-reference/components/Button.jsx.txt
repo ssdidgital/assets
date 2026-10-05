@@ -1,0 +1,9 @@
+import React from 'react';
+function cx(...a) { return a.filter(Boolean).join(' '); }
+
+export function Button({ variant = 'secondary', size = 'md', className, children, href, type, ...rest }) {
+  const cls = cx('ss-btn', 'ss-btn-' + variant, size === 'sm' && 'ss-btn-sm', className);
+  const sw = variant === 'primary' ? <span className="ss-btn-switch" aria-hidden="true" /> : null;
+  if (href) return <a className={cls} href={href} {...rest}>{children}{sw}</a>;
+  return <button type={type || 'button'} className={cls} {...rest}>{children}{sw}</button>;
+}

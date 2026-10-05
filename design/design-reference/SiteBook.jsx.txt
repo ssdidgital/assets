@@ -1,0 +1,138 @@
+const { Field: BField } = window.SystemSwitchDigitalDesignSystem_6d572b;
+
+const BOOK_SECTIONS = [
+  { title: 'About you', qs: [
+    { id: 'name', label: 'First and last name', type: 'text', auto: 'name' },
+    { id: 'email', label: 'Email', type: 'email', auto: 'email' },
+    { id: 'phone', label: 'Phone, with country code', type: 'tel', auto: 'tel' },
+    { id: 'biz', label: 'Business name and website', type: 'text' }
+  ] },
+  { title: 'About the business', qs: [
+    { id: 'sell', label: 'What do you sell, and roughly what does a client pay?', type: 'text', help: 'e.g. "a 6-month coaching programme, $8,000".' },
+    { id: 'revenue', label: 'Roughly what does the business bring in each month?', opts: ['Under $20k', '$20k–$50k', '$50k–$100k', '$100k–$400k', 'Over $400k', "I'd rather say on the call"] },
+    { id: 'buy', label: 'How do clients usually buy from you?', opts: ['After a sales or discovery call', 'Directly online, with no call', 'Through a proposal or quote', 'A mix of these'] },
+    { id: 'sales', label: 'Who handles sales today?', opts: ['Just me', 'Me plus a closer or small sales team', "A sales team I don't personally manage"] }
+  ] },
+  { title: 'Where things stand', qs: [
+    { id: 'losing', label: 'Where do you feel the business is losing the most?', opts: ['Not enough of the right people finding us', "Interest that doesn't turn into calls", 'Past leads and enquiries we never followed up properly', "Clients who don't stay, buy again or refer", "I'm honestly not sure"] },
+    { id: 'list', label: 'Roughly how many past leads, enquiries or clients are in your CRM or inbox?', opts: ['Under 500', '500–2,000', '2,000–10,000', 'Over 10,000', 'No idea'] },
+    { id: 'why', label: 'What made you reach out now?', long: true, help: 'A sentence or two is plenty.' },
+    { id: 'heard', label: 'How did you hear about us?', optional: true, opts: ['Referral', 'LinkedIn', 'Message from Kyū', 'Search', 'Other'] }
+  ] }
+];
+
+function QLabel({ n, q }) {
+  return <React.Fragment><span className="s-qn">{String(n).padStart(2, '0')}</span>{q.label}{q.optional ? <span className="s-opt"> (optional)</span> : null}</React.Fragment>;
+}
+
+function Radios({ q, n, value, onChange, invalid }) {
+  return (
+    <fieldset className={'s-radios' + (invalid ? ' s-invalid' : '')}>
+      <legend className="s-qlabel"><QLabel n={n} q={q} /></legend>
+      <div className="s-radio-list">{q.opts.map((o) => (
+        <label key={o} className="s-radio"><input type="radio" name={q.id} value={o} checked={value === o} onChange={() => onChange(o)} /><span>{o}</span></label>
+      ))}</div>
+    </fieldset>
+  );
+}
+
+function LongField({ q, n, value, onChange, invalid }) {
+  return (
+    <div className={'ss-field s-long' + (invalid ? ' s-invalid' : '')}>
+      <label className="s-qlabel" htmlFor={'q-' + q.id}><QLabel n={n} q={q} /></label>
+      <textarea id={'q-' + q.id} className="ss-field-input" rows={4} value={value || ''} onChange={(e) => onChange(e.target.value)} aria-invalid={invalid ? 'true' : undefined}></textarea>
+      {q.help ? <span className="ss-field-help">{q.help}</span> : null}
+    </div>
+  );
+}
+
+function NextPanel({ step }) {
+  const rows = ['Tell us about your business', 'Choose a time', "We'll show you where we'd start"];
+  return (
+    <aside className="s-next">
+      <span className="ss-label">What happens next</span>
+      <ol>{rows.map((r, i) => <li key={r} aria-current={i === step ? 'step' : undefined}><span className="s-qn">{String(i + 1).padStart(2, '0')}</span>{r}</li>)}</ol>
+    </aside>
+  );
+}
+
+function BookForm({ go }) {
+  const [v, setV] = React.useState({});
+  const [errs, setErrs] = React.useState(null);
+  const set = (id) => (val) => setV((s) => ({ ...s, [id]: val }));
+  const submit = (e) => {
+    e.preventDefault();
+    const bad = {};
+    BOOK_SECTIONS.forEach((s) => s.qs.forEach((q) => { if (!q.optional && !String(v[q.id] || '').trim()) bad[q.id] = true; }));
+    if (Object.keys(bad).length) { setErrs(bad); window.scrollTo({ top: 0 }); return; }
+    go('start/calendar');
+  };
+  let n = 0;
+  return (
+    <form className="s-form" onSubmit={submit} noValidate>
+      {errs ? <p className="s-form-error ss-body" role="alert">Something didn't go through. Check the highlighted fields and try again.</p> : null}
+      {BOOK_SECTIONS.map((s) => (
+        <section key={s.title} className="ss-card s-form-card">
+          <h2 className="ss-h3" style={{ margin: 0 }}>{s.title}</h2>
+          {s.qs.map((q) => {
+            n += 1;
+            const inv = errs && errs[q.id];
+            if (q.opts) return <Radios key={q.id} q={q} n={n} value={v[q.id]} onChange={set(q.id)} invalid={inv} />;
+            if (q.long) return <LongField key={q.id} q={q} n={n} value={v[q.id]} onChange={set(q.id)} invalid={inv} />;
+            return <BField key={q.id} id={'q-' + q.id} className={inv ? 's-invalid' : ''} label={<QLabel n={n} q={q} />} type={q.type} autoComplete={q.auto} help={q.help} value={v[q.id] || ''} onChange={(e) => set(q.id)(e.target.value)} aria-invalid={inv ? 'true' : undefined} />;
+          })}
+        </section>
+      ))}
+      <div><SButton variant="primary" type="submit">Choose a time →</SButton></div>
+    </form>
+  );
+}
+
+function SiteBook({ go, step }) {
+  if (step === 'booked') {
+    const prep = ["Have a rough idea of last month's numbers to hand: enquiries, calls booked, clients won.", 'Have your CRM or wherever your leads live open, if you can.', "Join from somewhere quiet. We'll be asking proper questions."];
+    return (
+      <section className="s-sec s-sec-first"><div className="s-wrap s-center">
+        <h1 className="s-h2" style={{ marginTop: 0 }}>You're <Em>booked in.</Em></h1>
+        <p className="ss-body-lg s-lede">Your confirmation and a calendar invite are on their way to your inbox. If you can't find them, check your spam folder and save our address.</p>
+        <div className="s-prep">
+          <h2 className="ss-h3" style={{ margin: 0 }}>Before we speak</h2>
+          <ul className="s-list ss-body">{prep.map((p) => <li key={p}><SIcon name="check" size={20} /><span>{p}</span></li>)}</ul>
+          <p className="ss-body" style={{ color: 'var(--text-secondary)' }}>If something comes up, use the link in your invite to move the call. We'd rather move it than have you rush it.</p>
+          <p className="ss-body">Speak soon.</p>
+        </div>
+      </div></section>
+    );
+  }
+  const cal = step === 'calendar';
+  return (
+    <section className="s-sec s-sec-first"><div className="s-wrap s-book">
+      <div className="s-book-main">
+        {cal ? (
+          <React.Fragment>
+            <span className="ss-label s-eyebrow">Application</span>
+            <h1 className="s-h2">Choose a time that <Em>suits you</Em></h1>
+            <p className="ss-body-lg s-book-intro">Calls last 30 minutes, on Zoom. Pick a slot below and you'll get a confirmation straight away.</p>
+            <button className="s-cal" onClick={() => go('start/booked')}>
+              <span className="ss-label">Calendar embed</span>
+              <span className="ss-caption" style={{ color: 'var(--text-secondary)' }}>Prototype: click to simulate a booking</span>
+            </button>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <span className="ss-label s-eyebrow">Application</span>
+            <h1 className="s-h2">Book <Em>a systems audit</Em></h1>
+            <div className="s-book-intro ss-body-lg">
+              <p>Tell us a little about your business. It takes about three minutes, and it means the call is about you from the first minute.</p>
+              <p>If we can help, we'll show you where we'd start. If we can't, we'll tell you, and point you somewhere better if we know of somewhere.</p>
+            </div>
+            <BookForm go={go} />
+          </React.Fragment>
+        )}
+      </div>
+      <NextPanel step={cal ? 1 : 0} />
+    </div></section>
+  );
+}
+
+Object.assign(window, { SiteBook });

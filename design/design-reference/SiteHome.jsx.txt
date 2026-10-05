@@ -1,0 +1,221 @@
+function HeroLede({ t }) {
+  const fmt = (t && t.ledeFormat) || 'Paragraph';
+  const size = (t && t.ledeSize) || 19;
+  const width = (t && t.ledeWidth) || 640;
+  const st = { fontSize: size, maxWidth: width };
+  const intro = 'System Switch is a growth infrastructure firm for founder-led coaches, consultants and service providers.';
+  if (fmt === 'Split') return (
+    <div className="s-lede-split" style={{ maxWidth: width }}>
+      <p className="s-lede-a" style={{ fontSize: size + 2 }}>{intro}</p>
+      <p className="s-lede-b" style={{ fontSize: size - 2 }}>We find where revenue is leaking, install the systems that stop it, and hand you the controls.</p>
+    </div>
+  );
+  if (fmt === 'Three steps') return (
+    <div className="s-lede-steps" style={{ maxWidth: Math.max(width, 820) }}>
+      <p className="ss-body-lg s-lede" style={st}>{intro}</p>
+      <ol>{['We find where revenue is leaking,', 'install the systems that stop it,', 'and hand you the controls.'].map((x, i) => (
+        <li key={x}><span className="s-qn">{String(i + 1).padStart(2, '0')}</span><span>{x}</span></li>
+      ))}</ol>
+    </div>
+  );
+  if (fmt === 'Ruled') return (
+    <div className="s-lede-ruled" style={{ maxWidth: width }}>
+      <p style={{ fontSize: size }}>{intro} We find where revenue is leaking, install the systems that stop it, and hand you the controls.</p>
+    </div>
+  );
+  return <p className="ss-body-lg s-lede" style={st}>{intro} We find where revenue is leaking, install the systems that stop it, and hand you the controls.</p>;
+}
+
+function HHero({ go, t }) {
+  return (
+    <section className="s-dots s-hero">
+      <div className="s-wrap s-center">
+        <Eyebrow>Growth infrastructure for founder-led businesses</Eyebrow>
+        <h1 className="s-hero-h">We engineer the systems that win clients, and <Em>win back the buyers you've already paid for.</Em></h1>
+        <HeroLede t={t} />
+        <div className="s-ctas">
+          <SButton variant="primary" className="s-blink" onClick={() => go('start')}>Book a systems audit</SButton>
+          <SButton variant="ghost" onClick={() => go('home#how')}>See how we work →</SButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HBuiltFor() {
+  return (
+    <section className="s-builtfor"><div className="s-wrap s-center">
+      <span className="ss-label s-builtfor-k">Built for</span>
+      <ul className="s-builtfor-list">{['Coaches', 'Consultants', 'Service providers'].map((x) => <li key={x}>{x}</li>)}</ul>
+    </div></section>
+  );
+}
+
+function HRouter({ go }) {
+  const items = [
+    ['search', 'How we think ↓', 'The problem we see most often in founder-led businesses, and why more leads rarely fix it.', 'home#diagnosis'],
+    ['workflow', 'How we work →', 'What we build, how an engagement runs, and what you keep at the end.', 'approach'],
+    ['message', 'Ready to talk →', 'Tell us about your business and book a time.', 'start']
+  ];
+  return (
+    <section className="s-sec"><div className="s-wrap s-center">
+      <h2 className="s-h2" style={{ marginTop: 0 }}>What brings you by?</h2>
+      <div className="s-strip">{items.map(([i, t, d, to]) => (
+        <button key={t} onClick={() => go(to)}>
+          <span className="s-tile"><SIcon name={i} size={16} /></span>
+          <h3>{t}</h3>
+          <p>{d}</p>
+        </button>
+      ))}</div>
+    </div></section>
+  );
+}
+
+function HDiagnosis() {
+  const segs = [
+    ['now', 24, 'Bought straight away.', 'The part most businesses measure and optimise.'],
+    ['wait', 44, 'Said "not now".', 'Interested, qualified, and left in the CRM.'],
+    ['leak', 32, 'Bought later, elsewhere.', 'Revenue the business paid to create and never collected.']
+  ];
+  return (
+    <section className="s-sec s-sunk" id="diagnosis"><div className="s-wrap s-center">
+      <Eyebrow>What the CRM won't tell you</Eyebrow>
+      <h2 className="s-h2" style={{ maxWidth: 900 }}>Most businesses think they need more leads. <Em><br />They're leaking the ones they have.</Em></h2>
+      <div className="s-read ss-body" style={{ color: 'var(--text-secondary)' }}>
+        <p>Every month, people raise their hand. They book a call, watch the training, ask about price. Then the timing's wrong, and they say "not now".<br />The team moves on to this week's enquiries, and everyone from last month goes quiet in the CRM.</p>
+        <p>Many of them still buy, eventually. From whoever followed up.</p>
+      </div>
+      <div className="s-illo">
+        <span className="ss-label s-illo-k">Illustration</span>
+        <h3 className="ss-h3 s-illo-h"><Em>Twelve months</Em> of enquiries</h3>
+        <div className="s-bar-wrap">
+          <div className="s-bar" role="img" aria-label="An illustrative bar: a small share bought straight away, the largest share said not now, and a large share bought later from someone else.">
+            {segs.map(([c, w]) => <span key={c} className={'s-seg s-seg-' + c} style={{ flexGrow: w }}></span>)}
+          </div>
+          <div className="s-key">{segs.map(([c, w, l, d]) => (
+            <div key={c} className={'s-key-i s-key-' + c} style={{ flexGrow: w }}><strong>{l}</strong><p>{d}</p></div>
+          ))}</div>
+        </div>
+        <p className="ss-caption s-illo-note">Proportions are illustrative. On a first call, we find the real ones for your business.</p>
+      </div>
+      <div className="s-read ss-body" style={{ color: 'var(--text-secondary)' }}>
+        <p>So the business spends more to find new strangers, while the people who already know it, trust it and asked about it sit untouched. The cause is rarely the sales team. It's infrastructure: nothing in the business is built to hold a buyer between "interested" and "ready".</p>
+      </div>
+      <p className="ss-h2 s-statement" style={{ margin: 'var(--space-12) 0 0' }}>We measure growth by what a business keeps.</p>
+    </div></section>
+  );
+}
+
+function HBuild() {
+  const rows = [
+    ['target', 'Acquisition.', 'A front end that brings in the right people: the message, the funnel and the path from first click to booked call.'],
+    ['repeat', 'Conversion.', "Fast, consistent follow-up that turns this week's enquiries into booked, qualified calls."],
+    ['growth', 'Recovery.', 'The buyers already sitting in your list, from last month or last year, brought back to the table without new ad spend.', 'Where we usually start'],
+    ['users', 'Retention.', 'Clients who stay, buy again and send people your way.']
+  ];
+  return (
+    <section className="s-sec"><div className="s-wrap s-center">
+      <Eyebrow>What we build</Eyebrow>
+      <h2 className="s-h2">Four stages of revenue.<br />We start <Em>where the leak is biggest.</Em></h2>
+      <div className="s-rows">{rows.map(([i, t, d, tag], n) => (
+        <div className="s-row" key={t}>
+          <div className="s-row-body">
+            <div className="s-row-meta"><span className="ss-label s-stage">Stage {n + 1}</span>{tag ? <span className="ss-label s-tag">{tag}</span> : null}</div>
+            <h3 className="ss-h3" style={{ margin: 0 }}>{t}</h3>
+            <p className="ss-body" style={{ margin: 0, color: 'var(--text-secondary)' }}>{d}</p>
+          </div>
+          <div className="s-row-tile" data-theme="forest"><SIcon name={i} size={36} /></div>
+        </div>
+      ))}</div>
+      <p className="ss-body-lg s-after">Revenue moves through all four. Most businesses only ever invest in the first. The fastest return is usually further down.</p>
+    </div></section>
+  );
+}
+
+function HHow() {
+  const { FeatureCards } = window.SystemSwitchDigitalDesignSystem_6d572b;
+  const items = [
+    { label: 'First', icon: 'search', title: 'Diagnose.', text: "We map how revenue moves through your business today, from first enquiry to repeat client. Before we build anything, you'll know where the biggest constraint sits and what we'd fix first." },
+    { label: 'Then', icon: 'layers', title: 'Install.', text: 'We engineer the system inside your business, around your offer and in your voice. Your team keeps working while we build.' },
+    { label: 'Finally', icon: 'switch', title: 'Hand over.', text: 'We train your people, document every part, and hand you the controls. We stay on for 30 days after handover, until your team is running it without us.' }
+  ];
+  return (
+    <section className="s-sec s-sunk" id="how"><div className="s-wrap s-center">
+      <Eyebrow>How we work</Eyebrow>
+      <h2 className="s-h2">Diagnose. Install. <Em>Hand over.</Em></h2>
+      <div className="s-steps"><FeatureCards items={items} /></div>
+      <div className="s-keep">
+        <span className="s-tile"><SIcon name="lock" size={20} /></span>
+        <div><strong className="ss-h3">You keep what we build.</strong><p className="ss-body">It lives in your accounts, with your data.</p></div>
+      </div>
+    </div></section>
+  );
+}
+
+function HFit() {
+  const good = ['You sell a premium service or programme, and buyers usually take a call before they commit.', "You have a list of past leads, enquiries or clients that you've paid to build.", 'Revenue is consistent, but growth still runs through you.', 'You want a system you keep.'];
+  const not = ["You're still finding your offer or your first clients.", "You're looking for cheap leads or a quick campaign.", "You'd rather not look at the numbers."];
+  return (
+    <section className="s-sec"><div className="s-wrap s-center">
+      <Eyebrow>Who it's for</Eyebrow>
+      <h2 className="s-h2" style={{ maxWidth: 900 }}>Built for founder-led businesses that have <Em>proven their model.</Em></h2>
+      <div className="s-fit">
+        <div><h3 className="ss-h3" style={{ margin: 0 }}>A good fit if:</h3><ul className="s-list ss-body">{good.map((g) => <li key={g}><SIcon name="check" size={20} /><span>{g}</span></li>)}</ul></div>
+        <div><h3 className="ss-h3" style={{ margin: 0, color: 'var(--text-secondary)' }}>Not a fit if:</h3><ul className="s-list s-list-not ss-body">{not.map((g) => <li key={g}><SIcon name="close" size={20} /><span>{g}</span></li>)}</ul></div>
+      </div>
+    </div></section>
+  );
+}
+
+function HFounder({ go }) {
+  return (
+    <section className="s-sec"><div className="s-wrap s-founder">
+      <div className="s-portrait"><span className="ss-label">Portrait — 4:5, professional</span></div>
+      <div className="s-founder-text">
+        <Eyebrow>The founder</Eyebrow>
+        <h2 className="s-h2" style={{ marginTop: 0 }}>Built by <Em>a closer.</Em></h2>
+        <p className="ss-body">Kyū spent six years on sales floors, taking <strong><Ph>[[X,XXX+]]</Ph></strong> calls and closing <strong><Ph>[[$X]]</Ph></strong> in high-ticket deals for B2B and B2C businesses, and watching five-figure buyers slip through the follow-up gap.</p>
+        <p className="ss-body">Before that, he helped grow a youth-services company to £800,000 a year (nearly $1 million) on government contracts, then lost it, because it ran on talent instead of systems. System Switch is the infrastructure both of those businesses needed.</p>
+        <SButton variant="ghost" onClick={() => go('about')}>Read the story →</SButton>
+      </div>
+    </div></section>
+  );
+}
+
+function HFaq() {
+  const qs = [
+    ['What happens in a systems audit?', "A 30-minute call about how revenue moves through your business: where enquiries come from, what happens to the ones who don't buy straight away, and how follow-up works today. You'll leave knowing where the biggest constraint sits and what we'd fix first."],
+    ['Does it cost anything?', 'No. The systems audit is free.'],
+    ['What do I need to have in place?', "A proven offer, a list of past leads, enquiries or clients, and a rough idea of last month's numbers. If you use a CRM, have it open on the call."],
+    ['What happens after the audit?', "If we can help, we'll come back with what we'd build first and what it would take. If we can't, we'll tell you on the call, and point you somewhere better if we know of somewhere."],
+    ['Do you work with businesses outside the UK?', 'Yes. We work with founder-led businesses in the UK, the US, Canada and Australia.']
+  ];
+  const [open, setOpen] = React.useState(0);
+  return (
+    <section className="s-sec s-sunk"><div className="s-wrap s-faqwrap">
+      <div className="s-faq-head">
+        <Eyebrow>Before you book</Eyebrow>
+        <h2 className="s-h2 s-faq-h">What to expect from <Em>a systems audit.</Em></h2>
+      </div>
+      <div className="s-faq">{qs.map(([q, a], i) => {
+        const on = open === i;
+        return (
+          <div key={q} className={'s-faq-i' + (on ? ' s-on' : '')}>
+            <h3 style={{ margin: 0 }}><button aria-expanded={on} aria-controls={'faq-' + i} onClick={() => setOpen(on ? -1 : i)}><span>{q}</span><span className="s-plus" aria-hidden="true"></span></button></h3>
+            <div id={'faq-' + i} className="s-faq-a" hidden={!on}><p className="ss-body">{a}</p></div>
+          </div>
+        );
+      })}</div>
+    </div></section>
+  );
+}
+
+function SiteHome({ go, t }) {
+  return (
+    <React.Fragment>
+      <HHero go={go} t={t} /><HRouter go={go} /><HDiagnosis /><HBuild /><HHow /><HFit /><HFounder go={go} /><HFaq />
+    </React.Fragment>
+  );
+}
+
+Object.assign(window, { SiteHome });

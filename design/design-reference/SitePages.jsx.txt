@@ -1,0 +1,118 @@
+function PageHero({ eyebrow, children, lede, go }) {
+  return (
+    <section className="s-sec s-sec-first s-phero"><div className="s-wrap s-center">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h1 className="s-h1">{children}</h1>
+      <p className="ss-body-lg s-lede">{lede}</p>
+      <div className="s-ctas"><SButton variant="primary" className="s-blink" onClick={() => go('start')}>Book a systems audit</SButton></div>
+    </div></section>
+  );
+}
+
+function SiteApproach({ go }) {
+  const principles = [
+    ['Fix what you have before you buy more.', "The cheapest revenue in any business is the revenue it has already earned and not yet collected. Before we add anything to the front of your business, we look at what's slipping out of the back. Sometimes the answer is more traffic. Usually it's somewhere closer to home."],
+    ['Find the one constraint.', 'A business rarely has five problems. It has one constraint that makes the other four look like problems. We find that one first and work on it until it moves.'],
+    ['Build around how you already sell.', "Your offer, your voice, the way your best clients bought from you. We build on what's already working in your business instead of replacing it with a template from someone else's."],
+    ['People stay in charge.', 'Automation handles the follow-up nobody has time for. Every conversation that matters still reaches a person, and you can see and stop anything the system does.'],
+    ['Measure what pays.', 'We report on booked calls, closed revenue and cost per client. Activity metrics such as opens, clicks and impressions are kept for diagnosis and never presented as results.'],
+    ['You keep what we build.', 'The system lives in your accounts, with your data, documented so your team can run it. Handover is planned from the first day.', true]
+  ];
+  const steps = [
+    ['Diagnose.', "We map how revenue moves through your business today, from first enquiry to repeat client. We look at your numbers, your pipeline and how your sales conversations actually go. You come away knowing where the biggest constraint sits and what we'd fix first. If we're not the right people to fix it, we'll tell you."],
+    ['Install.', 'We engineer the system inside your business: the messaging, the follow-up, the pipeline and the reporting, built around your offer and your voice. Your team keeps working while we build, and you see it running before it goes live.'],
+    ['Hand over.', 'We train your people, document every part, and hand you the controls. We stay on for 30 days after handover, until your team is running it without us.']
+  ];
+  const keep = ['A working system in your own accounts, carrying your data.', 'Documentation your team can follow without us.', 'People trained to run it, improve it and spot when it needs attention.', 'Reporting that shows what the system is producing in revenue.'];
+  return (
+    <React.Fragment>
+      <PageHero eyebrow="Approach" go={go} lede="Most growth advice ends with a slide deck and a list of things for your team to do. Ours ends with a working system inside your business, a team that knows how to run it, and the controls in your hands.">Everything we recommend, <Em>we install.</Em></PageHero>
+      <section className="s-sec"><div className="s-wrap s-center">
+        <Eyebrow>How we think</Eyebrow>
+        <h2 className="s-h2">How we think <Em>about growth</Em></h2>
+        <div className="s-grid s-grid-2">{principles.map(([t, p, lock]) => (
+          <div key={t} className="s-pcard">
+            {lock ? <span className="s-tile"><SIcon name="lock" size={20} /></span> : null}
+            <h3 className="ss-h3">{t}</h3>
+            <p className="ss-body">{p}</p>
+          </div>
+        ))}</div>
+      </div></section>
+      <section className="s-sec"><div className="s-wrap s-center">
+        <h2 className="s-h2" style={{ marginTop: 0 }}>Diagnose. Install. <Em>Hand over.</Em></h2>
+        <ol className="s-steplist">{steps.map(([t, p], i) => (
+          <li key={t}><span className="s-stepn">{String(i + 1).padStart(2, '0')}</span><div><h3 className="ss-h3">{t}</h3><p className="ss-body">{p}</p></div></li>
+        ))}</ol>
+      </div></section>
+      <section className="s-sec"><div className="s-wrap s-center">
+        <div className="s-panel">
+          <h2 className="s-h2" style={{ marginTop: 0 }}>What's <Em>yours</Em> at the end</h2>
+          <ul className="s-list ss-body">{keep.map((k) => <li key={k}><SIcon name="check" size={20} /><span>{k}</span></li>)}</ul>
+        </div>
+      </div></section>
+    </React.Fragment>
+  );
+}
+
+function SiteWho({ go }) {
+  const cards = [
+    ['user', 'Coaches', 'You sell a premium programme, usually after a call. Your content and launches bring people in, and a good number of them say "not yet". Most of those never hear from you properly again.'],
+    ['briefcase', 'Consultants', 'Your work comes through referrals and relationships, so the pipeline rises and falls with how much time you have to sell. Months with lots of client work tend to be followed by quiet ones.'],
+    ['layers', 'Service providers', 'You deliver well and clients stay, but enquiries arrive in bursts and follow-up depends on whoever has a spare hour. Quotes go out and nobody chases them.']
+  ];
+  const signs = ["Leads come in, but you couldn't say what happened to the ones from three months ago.", 'Your calendar fills and empties with your own energy levels.', "You've paid for ads, launches or agencies that brought in names and not enough clients.", 'Your best month and your worst month are further apart than they should be.', 'Follow-up happens when someone remembers.', "You can't step away for two weeks without revenue noticing."];
+  return (
+    <React.Fragment>
+      <PageHero eyebrow="Who we work with" go={go} lede="You've built something that sells. Clients pay well, and the results are real. But growth still runs through you, and some of the revenue you've earned keeps slipping away before it's collected.">For founder-led businesses that have proven their model and <Em>outgrown how they run it.</Em></PageHero>
+      <section className="s-sec"><div className="s-wrap s-center">
+        <h2 className="s-h2" style={{ marginTop: 0 }}>The businesses we <Em>know best</Em></h2>
+        <div className="s-grid s-grid-3">{cards.map(([i, l, p]) => (
+          <div key={l} className="s-pcard">
+            <span className="s-tile"><SIcon name={i} size={20} /></span>
+            <span className="ss-label s-pcard-k">{l}</span>
+            <p className="ss-body">{p}</p>
+          </div>
+        ))}</div>
+      </div></section>
+      <section className="s-sec"><div className="s-wrap s-center">
+        <h2 className="s-h2" style={{ marginTop: 0 }}>You'll recognise <Em>at least two</Em> of these</h2>
+        <ul className="s-list s-list-c ss-body">{signs.map((k) => <li key={k}><SIcon name="check" size={20} /><span>{k}</span></li>)}</ul>
+      </div></section>
+      <section className="s-sec s-sunk"><div className="s-wrap s-center">
+        <h2 className="s-h2" style={{ marginTop: 0 }}>The stage we're <Em>built for</Em></h2>
+        <p className="ss-body-lg s-para">Our clients are established. They have consistent revenue, a proven offer and a buyer who usually takes a call before committing. They're past proof of concept but not yet run by a management team. The founder is often still the bottleneck and the best closer in the business.</p>
+      </div></section>
+      <section className="s-sec"><div className="s-wrap s-center">
+        <h2 className="s-h2" style={{ marginTop: 0 }}>Who we're <Em>not for</Em></h2>
+        <p className="ss-body s-para" style={{ color: 'var(--text-secondary)' }}>We're probably not the right fit if you're still finding your offer or your first clients, if you're after cheap leads or a quick campaign, or if you'd rather not look at your numbers. We'd rather tell you that now than after you've paid us.</p>
+      </div></section>
+    </React.Fragment>
+  );
+}
+
+function SiteAbout() {
+  return (
+    <React.Fragment>
+      <section className="s-sec s-sec-first s-phero"><div className="s-wrap s-center">
+        <Eyebrow>About</Eyebrow>
+        <h1 className="s-h1">Built from <Em>the closer's seat.</Em></h1>
+        <div className="s-portrait s-portrait-lg"><span className="ss-label">Portrait — 4:5, professional</span></div>
+      </div></section>
+      <section className="s-sec"><div className="s-wrap s-center">
+        <div className="s-story ss-body-lg">
+          <p className="s-story-lead">I've watched the same leak from three different seats.</p>
+          <div><span className="ss-label s-story-k">01 · The founder</span>
+            <p><strong>The first was my own business.</strong> With a business partner, I helped grow a London youth-services company to £800,000 a year (nearly $1 million), delivering outreach and trauma-informed support for young people under government contracts with local authorities and the mayor's office. On paper it worked. Underneath, it ran on talent and long nights. Every problem got a clever fix, and none of them got a system. When it fell, it fell completely, and I lost it all. That taught me something I now build every engagement around: a business that depends on one person's brilliance has a ceiling, and sooner or later a floor.</p></div>
+          <div><span className="ss-label s-story-k">02 · The sales floor</span>
+            <p><strong>The second seat was the sales floor.</strong> For six years I've closed high-ticket offers for B2B and B2C businesses: agencies and service firms selling to business owners, and education and investment programmes selling to individuals. In that time I've taken <strong><Ph>[[X,XXX+]]</Ph></strong> sales calls and closed <strong><Ph>[[$X]]</Ph></strong> in deals. The industries changed and the pattern didn't. A buyer books a call, means it, and says the timing's wrong. They go back into the CRM, and nobody calls them again. Months later they buy, often from whoever followed up. I've watched five-figure buyers disappear into that gap far too many times, and I've seen what happens when someone finally goes back for them.</p></div>
+          <div><span className="ss-label s-story-k">03 · The builder</span>
+            <p><strong>The third seat is this one.</strong> System Switch builds what both of those businesses were missing: the infrastructure that holds a buyer between "interested" and "ready", and puts them back in front of the people who can help them. We build it inside your business, around your offer and your voice. Then we hand you the controls, and you keep what we build.</p></div>
+          <p>That's why I describe the firm as built by a closer rather than a funnel builder. Most growth advice starts with traffic. Mine starts with the money a business has already earned and never collected, because from the closer's seat that's where it is easiest to see.</p>
+          <p className="s-story-music">Before any of this, I produced music for labels and artists. Arranging a track taught me early that the things people experience as effortless usually rest on a structure nobody sees. I still think about businesses that way.</p>
+        </div>
+      </div></section>
+    </React.Fragment>
+  );
+}
+
+Object.assign(window, { SiteApproach, SiteWho, SiteAbout });

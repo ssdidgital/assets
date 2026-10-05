@@ -1,0 +1,30 @@
+/* Spacing (8pt), radius, stroke, sizes, font stacks, motion. */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --radius-none: 0px;
+  --radius-round: 9999px;
+  --stroke-hairline: 1px;
+  --stroke-strong: 2px;
+  --size-control: 44px;
+  --size-control-sm: 34px;
+  --size-mark-min: 24px;
+  --size-content: 1240px;
+  --font-sans: Outfit, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, Menlo, monospace;
+  --font-logo-serif: Fraunces, Georgia, serif;
+  --font-logo-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+:root {
+  --ss-ease: cubic-bezier(.2, 0, 0, 1); /* @kind other */
+  --ss-fast: 120ms; /* @kind other */
+  --ss-base: 200ms; /* @kind other */
+  --ss-slow: 400ms; /* @kind other */
+}

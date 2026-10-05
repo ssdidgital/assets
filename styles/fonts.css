@@ -1,0 +1,4 @@
+/* Self-hosted fonts. Outfit ships as one variable file covering 400–600. Never italic. */
+@font-face { font-family: Outfit; src: url("/fonts/Outfit.woff2") format("woff2"); font-weight: 400 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "DM Mono"; src: url("/fonts/DMMono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "DM Mono"; src: url("/fonts/DMMono-500.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }

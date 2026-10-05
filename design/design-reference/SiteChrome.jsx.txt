@@ -1,0 +1,98 @@
+const { Button: SButton, Icon: SIcon } = window.SystemSwitchDigitalDesignSystem_6d572b;
+
+const NAV = [['approach', 'Approach'], ['who', 'Who we work with'], ['about', 'About']];
+
+function Em({ children }) { return <span className="ss-emphasis-inline">{children}</span>; }
+function Ph({ children }) { return <span className="s-ph">{children}</span>; }
+function Eyebrow({ children }) { return <span className="ss-label s-eyebrow">{children}</span>; }
+
+function SiteHeader({ go, page }) {
+  const [open, setOpen] = React.useState(false);
+  const nav = (p) => { setOpen(false); go(p); };
+  return (
+    <header className="s-head">
+      <div className="s-wrap s-head-in">
+        <a href="#/" className="s-logo" onClick={(e) => { e.preventDefault(); nav('home'); }} aria-label="System Switch Digital home">
+          <img className="s-full" src={(window.__resources && window.__resources.logoGold) || '../../assets/logos/ssd-lockup-horizontal-wordmark-gold.svg'} alt="System Switch" />
+          <img className="s-mark" src={(window.__resources && window.__resources.markGold) || '../../assets/logos/ssd-mark-gold.svg'} alt="System Switch" />
+        </a>
+        <SButton variant="secondary" size="sm" className="s-head-cta" onClick={() => nav('start')}>Book a systems audit <span aria-hidden="true">↗</span></SButton>
+      </div>
+    </header>
+  );
+}
+
+const BANDS = {
+  home: [<React.Fragment>Every business has <Em>one constraint</Em> holding the rest back.</React.Fragment>, <React.Fragment>Tell us about your business. If we can help, we'll show you where to start.<br />If we can't, we'll say so.</React.Fragment>],
+  approach: [<React.Fragment>Start with <Em>a systems audit.</Em></React.Fragment>, "Tell us where your business is and where you want it to go. We'll tell you honestly whether we can help, and where we'd start."],
+  who: [<React.Fragment>Sound like <Em>your business?</Em></React.Fragment>, "Tell us where things stand. If we're a fit, we'll show you where we'd start."]
+};
+
+function ClosingBand({ go, page }) {
+  const [hd, line] = BANDS[page] || BANDS.home;
+  return (
+    <section data-theme="forest" className="s-band">
+      <div className="s-box s-center" data-theme="linen">
+        <h2 className="s-h2" style={{ maxWidth: 820 }}>{hd}</h2>
+        <p className="ss-body s-lede">{line}</p>
+        <div className="s-ctas"><SButton variant="primary" className="s-blink" onClick={() => go('start')}>Book a systems audit</SButton></div>
+      </div>
+    </section>
+  );
+}
+
+function SiteFooter({ go }) {
+  const cols = [
+    ['Company', [...NAV, ['start', 'Book a systems audit']].map(([k, l]) => ['go', k, l])],
+    ['Contact', [['a', 'mailto:support@systemswitch.digital', 'support@systemswitch.digital'], ['a', '#', 'LinkedIn']]],
+    ['Legal', [['a', '#', 'Privacy policy'], ['a', '#', 'Terms']]]
+  ];
+  return (
+    <footer data-theme="forest" className="s-foot">
+      <div className="s-foot-frame">
+        <div className="s-foot-top">
+          <div className="s-foot-brand">
+            <img src={(window.__resources && window.__resources.logoWhite) || '../../assets/logos/ssd-lockup-horizontal-wordmark-white.svg'} alt="System Switch" />
+            <p className="ss-body-sm">Growth infrastructure for founder-led businesses.</p>
+          </div>
+          <div className="s-foot-cols">{cols.map(([h, items]) => (
+            <nav key={h} aria-label={h}>
+              <span className="s-foot-h">{h}</span>
+              <ul>{items.map(([t, to, l]) => <li key={l}>{t === 'go' ? <button onClick={() => go(to)}>{l}</button> : <a href={to}>{l}</a>}</li>)}</ul>
+            </nav>
+          ))}</div>
+                  </div>
+        <div className="s-foot-legal">
+          <span>© 2026 System Switch Digital · <Ph>[[company number and registered office]]</Ph></span>
+          <nav aria-label="Social"><a href="#">LinkedIn</a></nav>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function CookieBanner() {
+  const [shown, setShown] = React.useState(localStorage.getItem('ssd-site-cookies') !== 'set' && !location.search.includes('review'));
+  if (!shown) return null;
+  const done = () => { localStorage.setItem('ssd-site-cookies', 'set'); setShown(false); };
+  return (
+    <div className="s-cookie" role="region" aria-label="Cookies">
+      <div className="s-wrap s-cookie-in">
+        <p className="ss-body-sm">We use essential cookies to run this site, and optional ones to understand how it's used.</p>
+        <div className="s-cookie-btns"><SButton variant="secondary" size="sm" onClick={done}>Accept all</SButton><SButton variant="secondary" size="sm" onClick={done}>Essential only</SButton></div>
+      </div>
+    </div>
+  );
+}
+
+function NotFound({ go }) {
+  return (
+    <section className="s-sec s-sec-first s-stub"><div className="s-wrap s-center">
+      <h1 className="ss-display s-h0" style={{ maxWidth: 760 }}>This page has gone quiet.</h1>
+      <p className="ss-body-lg s-lede">Most things do without follow-up.</p>
+      <div className="s-ctas"><SButton variant="ghost" onClick={() => go('home')}>Home</SButton><SButton variant="primary" className="s-blink" onClick={() => go('start')}>Book a systems audit</SButton></div>
+    </div></section>
+  );
+}
+
+Object.assign(window, { Em, Ph, Eyebrow, SiteHeader, ClosingBand, SiteFooter, CookieBanner, NotFound, SButton, SIcon });

@@ -1,0 +1,15 @@
+/* Type styles: Outfit SemiBold display, Outfit Regular text, DM Mono labels/data. Never italic. */
+.ss-display-xl { font-family: var(--font-sans); font-size: 80px; line-height: 80px; font-weight: 600; letter-spacing: -0.03em; }
+.ss-display { font-family: var(--font-sans); font-size: 56px; line-height: 58px; font-weight: 600; letter-spacing: -0.025em; }
+.ss-h1 { font-family: var(--font-sans); font-size: 40px; line-height: 44px; font-weight: 600; letter-spacing: -0.02em; }
+.ss-h2 { font-family: var(--font-sans); font-size: 28px; line-height: 32px; font-weight: 600; letter-spacing: -0.015em; }
+.ss-emphasis { font-family: var(--font-sans); font-size: 56px; line-height: 58px; font-weight: 600; letter-spacing: -0.025em; color: var(--accent-text); }
+.ss-h3 { font-family: var(--font-sans); font-size: 20px; line-height: 26px; font-weight: 600; letter-spacing: -0.005em; }
+.ss-body-lg { font-family: var(--font-sans); font-size: 18px; line-height: 28px; font-weight: 400; }
+.ss-body { font-family: var(--font-sans); font-size: 16px; line-height: 24px; font-weight: 400; }
+.ss-body-sm { font-family: var(--font-sans); font-size: 14px; line-height: 20px; font-weight: 400; }
+.ss-button { font-family: var(--font-sans); font-size: 15px; line-height: 16px; font-weight: 600; letter-spacing: 0.005em; }
+.ss-label { font-family: var(--font-mono); font-size: 11px; line-height: 14px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+.ss-data { font-family: var(--font-mono); font-size: 13px; line-height: 18px; font-weight: 400; font-variant-numeric: tabular-nums; }
+.ss-caption { font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 400; letter-spacing: 0.02em; }
+.ss-emphasis-inline { color: var(--accent-text); font-style: normal; font-weight: inherit; }

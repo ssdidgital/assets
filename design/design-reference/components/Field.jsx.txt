@@ -1,0 +1,15 @@
+import React from 'react';
+function cx(...a) { return a.filter(Boolean).join(' '); }
+
+export function Field({ id, label, help, error, className, ...rest }) {
+  const auto = 'ss-field-' + React.useId().replace(/[^A-Za-z0-9_-]/g, '');
+  const fid = id || auto;
+  const noteId = error ? fid + '-error' : help ? fid + '-help' : undefined;
+  return (
+    <div className={cx('ss-field', className)} data-invalid={error ? 'true' : undefined}>
+      <label className="ss-field-label" htmlFor={fid}>{label}</label>
+      <input type="text" {...rest} id={fid} className="ss-field-input" aria-invalid={error ? 'true' : undefined} aria-describedby={noteId} />
+      {error ? <span id={noteId} className="ss-field-error">{error}</span> : help ? <span id={noteId} className="ss-field-help">{help}</span> : null}
+    </div>
+  );
+}

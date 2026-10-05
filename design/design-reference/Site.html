@@ -1,0 +1,87 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Website · Final build" subtitle="Company site: Linen dot-grid hero, router cards, stage rows, Forest closing band and footer" -->
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>System Switch — Growth infrastructure for founder-led businesses</title>
+<meta name="description" content="We engineer the systems that win clients, and win back the buyers you've already paid for. For coaches, consultants and service providers.">
+<meta name="ext-resource-dependency" content="../../assets/logos/ssd-lockup-horizontal-wordmark-gold.svg" data-resource-id="logoGold">
+<meta name="ext-resource-dependency" content="../../assets/logos/ssd-mark-gold.svg" data-resource-id="markGold">
+<meta name="ext-resource-dependency" content="../../assets/logos/ssd-lockup-horizontal-wordmark-white.svg" data-resource-id="logoWhite">
+<link rel="icon" href="../../assets/logos/ssd-favicon-32.svg">
+<link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="site.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="SiteChrome.jsx"></script>
+<script type="text/babel" src="SiteHome.jsx"></script>
+<script type="text/babel" src="SiteBook.jsx"></script>
+<script type="text/babel" src="SitePages.jsx"></script>
+<style>body{margin:0}</style>
+</head><body><template id="__bundler_thumbnail" data-bg-color="#11352b"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect x="440" y="360" width="320" height="80" fill="#5f8a74"></rect><rect x="440" y="360" width="160" height="80" fill="#c9a24e"></rect></svg></template><div id="root"></div>
+<script type="text/babel">
+const META = {
+  home: ['System Switch — Growth infrastructure for founder-led businesses', "We engineer the systems that win clients, and win back the buyers you've already paid for. For coaches, consultants and service providers."],
+  approach: ['Our approach — System Switch', 'Everything we recommend, we install. How we diagnose, build and hand over growth systems that you own.'],
+  who: ['Who we work with — System Switch', 'Established coaches, consultants and service providers whose growth still runs through the founder.'],
+  about: ['About — System Switch', "Built by a closer. Why System Switch starts with the revenue a business has already earned."],
+  start: ['Book a systems audit — System Switch', "Tell us about your business. If we can help, we'll show you where we'd start."]
+};
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "ledeFormat": "Split",
+  "ledeSize": 19,
+  "ledeWidth": 640
+}/*EDITMODE-END*/;
+const PAGES = { approach: () => SiteApproach, who: () => SiteWho, about: () => SiteAbout };
+const parse = () => { const p = location.hash.replace(/^#\/?/, '').split('/'); return [p[0] || 'home', p[1] || '']; };
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [[page, sub], setRoute] = React.useState(parse());
+  React.useEffect(() => { const f = () => setRoute(parse()); addEventListener('hashchange', f); return () => removeEventListener('hashchange', f); }, []);
+  React.useEffect(() => {
+    const m = META[page]; document.title = m ? m[0] : 'Page not found — System Switch';
+    const d = document.querySelector('meta[name="description"]'); if (d && m) d.setAttribute('content', m[1]);
+  }, [page]);
+  React.useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window) || location.search.includes('review') || window !== window.top) return;
+    const root = document.querySelector('main');
+    const groups = '.s-strip,.s-rows,.ss-cards,.s-grid,.s-faq,.s-steplist';
+    const els = [];
+    root.querySelectorAll('.s-sec:not(.s-hero):not(.s-sec-first) .s-wrap, .s-sec-first:not(.s-hero) .s-wrap').forEach((w) => {
+      [...w.children].forEach((ch) => {
+        if (ch.matches(groups)) [...ch.children].forEach((g, i) => { g.style.transitionDelay = (i * 70) + 'ms'; els.push(g); });
+        else els.push(ch);
+      });
+    });
+    root.querySelectorAll('.s-illo').forEach((el) => els.push(el));
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('s-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    els.forEach((el) => { if (!el.classList.contains('s-rv')) { el.classList.add('s-rv'); io.observe(el); } });
+    return () => io.disconnect();
+  }, [page, sub]);
+  const go = (p) => {
+    const [path, hash] = p.split('#');
+    const [base, s = ''] = path.split('/');
+    if (base !== page || s !== sub) { location.hash = '/' + (base === 'home' ? '' : path); setRoute([base, s]); }
+    requestAnimationFrame(() => requestAnimationFrame(() => { const el = hash && document.getElementById(hash); window.scrollTo({ top: el ? el.getBoundingClientRect().top + window.scrollY - 88 : 0 }); }));
+  };
+  let body;
+  if (page === 'home') body = <SiteHome go={go} t={t} />;
+  else if (page === 'start') body = <SiteBook go={go} step={sub} />;
+  else if (PAGES[page]) { const P = PAGES[page](); body = <P go={go} />; }
+  else body = <NotFound go={go} />;
+  return (
+    <div className="s">
+      <SiteHeader go={go} page={page} />
+      <main className="s-frame">{body}</main>
+      {META[page] && page !== 'start' ? <ClosingBand go={go} page={page} /> : null}
+      <SiteFooter go={go} />
+      <CookieBanner />
+      <TweaksPanel>
+        <TweakSection label="Hero supporting text" />
+        <TweakSelect label="Format" value={t.ledeFormat} options={['Paragraph', 'Split', 'Three steps', 'Ruled']} onChange={(v) => { setTweak('ledeFormat', v); if (page !== 'home') go('home'); }} />
+        <TweakSlider label="Size" value={t.ledeSize} min={16} max={24} unit="px" onChange={(v) => setTweak('ledeSize', v)} />
+        <TweakSlider label="Line length" value={t.ledeWidth} min={480} max={820} step={20} unit="px" onChange={(v) => setTweak('ledeWidth', v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script></body></html>

@@ -1,0 +1,14 @@
+/* Base styles. Square corners, 1px hairlines, no shadows. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font-sans); font-size: 16px; line-height: 24px; text-rendering: optimizeLegibility; }
+em, i { font-style: normal; }
+img, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; border-radius: 0; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.s-skip { position: absolute; left: 16px; top: -100px; z-index: 40; padding: 10px 14px; background: var(--bg-raised); border: 1px solid var(--text-primary); color: var(--text-primary); }
+.s-skip:focus { top: 16px; }
+.s-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Fix: long footer links (the support email) overflow their column at 390px. */
+.s-foot-cols a { overflow-wrap: anywhere; }
