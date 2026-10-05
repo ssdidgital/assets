@@ -75,3 +75,8 @@ h1, h2, h3, .ss-h3, .s-faq-i button > span:first-child { text-wrap: balance; }
 /* The system diagram on the Approach page. */
 .s-approach-sys { width: 100%; max-width: 1144px; text-align: left; }
 .s-approach-sys .v2-sys { margin-top: var(--space-16); }
+
+/* QA: keep the hero inside narrow phones. */
+.s-hero .s-wrap > * { max-width: 100%; min-width: 0; }
+.s-hero-h { overflow-wrap: break-word; }
+@media (max-width: 400px) { .s-hero-h { font-size: 30px; line-height: 34px; } }

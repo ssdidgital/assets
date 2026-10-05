@@ -50,7 +50,7 @@ export function SiteFooter() {
   const cols: [string, FootLink[]][] = [
     ['Company', [['go', '/approach', 'Approach'], ['go', '/who-we-work-with', 'Who we work with'], ['go', '/about', 'About'], ['go', '/start', 'Book a systems audit']]],
     ['Legal', [['go', '/company', 'System Switch'], ['go', '/privacy', 'Privacy policy'], ['go', '/terms', 'Terms and conditions']]],
-    ['Contact', [['a', 'mailto:support@systemswitch.digital', 'support@systemswitch.digital'], ['a', '#', 'LinkedIn']]]
+    ['Contact', [['a', 'mailto:support@systemswitch.digital', 'support@systemswitch.digital']]]
   ];
   return (
     <footer data-theme="forest" className="s-foot">
@@ -69,7 +69,6 @@ export function SiteFooter() {
         </div>
         <div className="s-foot-legal">
           <span>© 2026 System Switch Digital</span>
-          <nav aria-label="Social"><a href="#">LinkedIn</a></nav>
         </div>
       </div>
     </footer>
