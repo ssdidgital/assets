@@ -27,7 +27,7 @@ export default function Work() {
           ))}
           <Link href="/work/sample-audit" className="s-pcard s-work-card s-work-sample">
             <span className="ss-label s-pcard-k">Sample</span>
-            <span className="s-work-stat">30 min</span>
+            <span className="s-work-stat">20 min</span>
             <h2 className="ss-h3">What a systems audit <Em>leaves you with.</Em></h2>
             <p className="ss-body">A redacted example of the write-up that follows the call.</p>
             <span className="s-work-more">See the sample →</span>

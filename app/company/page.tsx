@@ -22,7 +22,7 @@ export default function Company() {
       <section className="s-sec s-sec-first s-phero"><div className="s-wrap s-center">
         <Eyebrow>Company details</Eyebrow>
         <h1 className="s-h1">System Switch</h1>
-        <p className="ss-body-lg s-lede">Growth infrastructure for founder-led businesses.</p>
+        <p className="ss-body-lg s-lede">Sales infrastructure for founder-led businesses.</p>
       </div></section>
       <section className="s-sec" style={{ paddingTop: 0 }}><div className="s-wrap">
         <dl className="s-co">{rows.map(([k, v]) => (

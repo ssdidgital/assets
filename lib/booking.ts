@@ -1,6 +1,7 @@
+import { readCurrency, withCur } from './currency';
 import { readLeak } from './leak';
 
-// The 12 audit-application questions. Copy is verbatim from design/design-reference/SiteBook.jsx.txt.
+// The 13 audit-application questions. {cur} = the site currency symbol (follows the calculator toggle). Copy is verbatim from design/design-reference/SiteBook.jsx.txt.
 
 export type Question = {
   id: string;
@@ -21,14 +22,15 @@ export const BOOK_SECTIONS: { title: string; qs: Question[] }[] = [
     { id: 'biz', label: 'Business name and website', type: 'text' }
   ] },
   { title: 'About the business', qs: [
-    { id: 'sell', label: 'What do you sell, and roughly what does a client pay?', type: 'text', help: 'e.g. “a 6-month coaching programme, $8,000”.' },
-    { id: 'revenue', label: 'Roughly what does the business bring in each month?', opts: ['Under $20k', '$20k–$50k', '$50k–$100k', '$100k–$400k', 'Over $400k', "I’d rather say on the call"] },
+    { id: 'sell', label: 'What do you sell, and roughly what does a client pay?', type: 'text', help: 'e.g. “a 6-month coaching programme, {cur}8,000”.' },
+    { id: 'revenue', label: 'Roughly what does the business bring in each month?', opts: ['Under {cur}20k', '{cur}20k–{cur}50k', '{cur}50k–{cur}100k', '{cur}100k–{cur}400k', 'Over {cur}400k', 'I’d rather say on the call'] },
     { id: 'buy', label: 'How do clients usually buy from you?', opts: ['After a sales or discovery call', 'Directly online, with no call', 'Through a proposal or quote', 'A mix of these'] },
     { id: 'sales', label: 'Who handles sales today?', opts: ['Just me', 'Me plus a closer or small sales team', "A sales team I don’t personally manage"] }
   ] },
   { title: 'Where things stand', qs: [
     { id: 'losing', label: 'Where do you feel the business is losing the most?', opts: ['Not enough of the right people finding us', "Interest that doesn’t turn into calls", 'Past leads and enquiries we never followed up properly', "Clients who don’t stay, buy again or refer", "I’m honestly not sure"] },
     { id: 'list', label: 'Roughly how many past leads, enquiries or clients are in your CRM or inbox?', opts: ['Under 500', '500–2,000', '2,000–10,000', 'Over 10,000', 'No idea'] },
+    { id: 'nownext', label: 'When someone says “not now”, what usually happens next?', opts: ['Nothing, really', 'A few emails', 'A call or two', 'A follow-up sequence that runs for months'] },
     { id: 'why', label: 'What made you reach out now?', long: true, help: 'A sentence or two is plenty.' },
     { id: 'heard', label: 'How did you hear about us?', optional: true, opts: ['Referral', 'LinkedIn', 'Message from Kyū', 'Search', 'Other'] }
   ] }
@@ -36,7 +38,7 @@ export const BOOK_SECTIONS: { title: string; qs: Question[] }[] = [
 
 export type Answers = Record<string, string>;
 
-/** Ids of required questions (all except Q12) left blank. */
+/** Ids of required questions (all except the last) left blank. */
 export function missingAnswers(v: Answers): string[] {
   return BOOK_SECTIONS.flatMap((s) => s.qs).filter((q) => !q.optional && !String(v[q.id] || '').trim()).map((q) => q.id);
 }
@@ -48,8 +50,10 @@ export const APPLICATION_KEY = 'ssd-application';
  * calendar step can prefill the booking widget. Wire the CRM (e.g. GoHighLevel) POST here.
  */
 export async function submitApplication(v: Answers): Promise<void> {
-  // The visitor’s leak-calculator inputs travel with the application, if they used it.
-  const payload = { ...v, leakEstimate: readLeak() };
+  // Amounts carry the currency symbol in use; the leak-calculator inputs travel with the application, if they used it.
+  const cur = readCurrency();
+  const resolved = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, withCur(x, cur)]));
+  const payload = { ...resolved, currency: cur, leakEstimate: readLeak() };
   try { sessionStorage.setItem(APPLICATION_KEY, JSON.stringify(payload)); } catch { /* storage blocked: nothing to keep */ }
 }
 
@@ -86,6 +90,7 @@ const STAGE_BY_LOSING: ([stage: string, what: string] | null)[] = [
 ];
 
 export function startingStage(losing?: string) {
+  // (answers are saved with the symbol resolved; option order is what maps)
   const q = BOOK_SECTIONS.flatMap((s) => s.qs).find((x) => x.id === 'losing');
   const i = losing && q?.opts ? q.opts.indexOf(losing) : -1;
   return i >= 0 ? STAGE_BY_LOSING[i] : null;

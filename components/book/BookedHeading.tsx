@@ -20,6 +20,7 @@ export function BookedHeading() {
     <>
       <h1 className="s-h2" style={{ marginTop: 0 }}>You’re <Em>booked in</Em>{name ? ', ' + name + '.' : <Em>.</Em>}</h1>
       <p className="ss-body-lg s-lede">Your confirmation and a calendar invite are on their way to your inbox. If you can’t find them, check your spam folder and save our address.</p>
+      <p className="ss-body s-booked-brief">Your Recovery Brief follows within 48 hours of the call.</p>
       {known ? (
         <p className="s-booked-start">
           {stage

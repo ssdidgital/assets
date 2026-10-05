@@ -1,6 +1,7 @@
 import { BookForm } from '@/components/book/BookForm';
 import { LeakNote } from '@/components/book/LeakNote';
 import { NextPanel } from '@/components/book/NextPanel';
+import { Faq } from '@/components/home/Faq';
 import { SitePage } from '@/components/SiteChrome';
 import { Em } from '@/components/Text';
 import { pageMeta } from '@/lib/meta';
@@ -20,6 +21,14 @@ export default function Start() {
           </div>
           <LeakNote />
           <BookForm />
+          <div className="s-start-faq">
+            <h2 className="ss-h3">Before you book</h2>
+            <Faq items={[
+              ['What do I need to have in place?', 'A proven offer, a list of past leads, enquiries or clients, and a rough idea of last month’s numbers. If you use a CRM, have it open on the call.'],
+              ['What happens after the audit?', 'Your Recovery Brief arrives within 48 hours. If we can help further, we’ll say what we’d build first and what it would take. If we can’t, we’ll tell you on the call, and point you somewhere better if we know of somewhere.'],
+              ['Do you work with businesses outside the UK?', 'Yes. We work with founder-led businesses in the UK, the US, Canada and Australia.']
+            ]} />
+          </div>
         </div>
         <NextPanel step={0} />
       </div></section>

@@ -31,7 +31,7 @@ export default function SampleAudit() {
             <dl>
               <div><dt className="ss-label">Prepared for</dt><dd><Redacted lines={1} seed={2} /></dd></div>
               <div><dt className="ss-label">Business</dt><dd><Ph>[[Coach · premium programme]]</Ph></dd></div>
-              <div><dt className="ss-label">Call</dt><dd><Ph>[[Date]]</Ph> · 30 minutes</dd></div>
+              <div><dt className="ss-label">Call</dt><dd><Ph>[[Date]]</Ph> · 20 minutes</dd></div>
             </dl>
           </header>
           <SecIndex n="01">How revenue moves today</SecIndex>

@@ -105,3 +105,11 @@
 .s-co dd { margin: 0; font: 500 17px/1.5 var(--font-sans); overflow-wrap: anywhere; }
 .s-co-mail { user-select: all; }
 @media (max-width: 767px) { .s-co > div { grid-template-columns: 1fr; gap: var(--space-2); } }
+
+/* About: the closing line before the button. */
+.s-story-end { padding-top: var(--space-8); border-top: 1px solid var(--border-subtle); font-weight: 500; color: var(--text-primary); }
+
+/* /start: questions under the form; confirmation: Recovery Brief line. */
+.s-start-faq { width: 100%; margin-top: var(--space-16); }
+.s-start-faq > h2 { margin: 0 0 var(--space-4); }
+.s-booked-brief { margin: var(--space-4) 0 0; color: var(--text-primary); font-weight: 500; }

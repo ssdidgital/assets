@@ -5,7 +5,7 @@ import { pageMeta } from '@/lib/meta';
 
 export const metadata = pageMeta('start', '/start/booked', { index: false });
 
-const prep = ["Have a rough idea of last month’s numbers to hand: enquiries, calls booked, clients won.", 'Have your CRM or wherever your leads live open, if you can.', "Join from somewhere quiet. We’ll be asking proper questions."];
+const prep = ["Have a rough idea of last month’s numbers to hand: enquiries, calls booked, clients won.", 'Have your CRM or wherever your leads live open, if you can.', "Join from somewhere quiet. We’ll be asking proper questions.", 'If someone else helps you make decisions like this, they’re welcome to join.'];
 
 export default function Booked() {
   return (

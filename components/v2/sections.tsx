@@ -1,19 +1,19 @@
 import Link from 'next/link';
-import { BookButton, Button } from '../Button';
-import { HomeHero } from '../HomeHero';
+import { Button } from '../Button';
+import { Cur } from '../Cur';
 import { FeatureCards } from '../FeatureCards';
+import { HomeHero } from '../HomeHero';
 import { Faq } from '../home/Faq';
 import { Icon, type IconName } from '../Icon';
-import { Em, Eyebrow, Ph } from '../Text';
-import { SecIndex } from './SecIndex';
-import { LeakCalculator } from './LeakCalculator';
-import { SystemDiagram } from './SystemDiagram';
+import { Em, Ph } from '../Text';
 import { StatStrip } from '../work/StatStrip';
 import { Testimonial } from '../work/Testimonial';
+import { LeakCalculator } from './LeakCalculator';
+import { SecIndex } from './SecIndex';
+import { SystemDiagram } from './SystemDiagram';
 import { CASE_STUDIES } from '@/lib/work';
 
-// Homepage v2: same copy as components/home/sections.tsx, with varied layouts, mono section indexes,
-// a Forest "How we work" band and the system diagram. Styles live in styles/v2.css, scoped to .s-v2.
+// Homepage sections. Copy: “System Switch — Website Copy (Final)”, 5 Oct 2026. Styles in styles/v2.css (scoped to .s-v2).
 
 export function V2Hero() {
   return <HomeHero />;
@@ -44,19 +44,19 @@ export function V2Diagnosis({ n = '02' }: { n?: string }) {
   return (
     <section className="s-sec s-sunk" id="diagnosis"><div className="s-wrap">
       <SecIndex n={n}>What the CRM won’t tell you</SecIndex>
-      <h2 className="s-h2 v2-h v2-h-wide">Most businesses think they need more leads. <Em><br />They’re leaking the ones they have.</Em></h2>
+      <h2 className="s-h2 v2-h v2-h-wide">Most businesses think they need more leads. <Em><br />They’re losing buyers in the Not-Yet Gap.</Em></h2>
       <div className="v2-split v2-offset">
         <div aria-hidden="true" />
         <div className="s-read ss-body v2-read">
-          <p>Every month, people raise their hand. They book a call, watch the training, ask about price. Then the timing’s wrong, and they say “not now”.<br />The team moves on to this week’s enquiries, and everyone from last month goes quiet in the CRM.</p>
-          <p>Many of them still buy, eventually. From whoever followed up.</p>
+          <p>Every month, people raise their hand. They book a call, watch the training, ask about price. Then the timing’s wrong, and they say “not now”. The team moves on to this week’s enquiries, and everyone from last month goes quiet in the CRM.</p>
+          <p>But “not now” rarely means “not interested”. It usually means “not yet”. The money wasn’t free, the timing was off, life got loud. That stretch between “not now” and ready is the Not-Yet Gap. Many of the people in it still buy, eventually. From whoever followed up.</p>
         </div>
       </div>
       <LeakCalculator />
       <div className="v2-split v2-close">
-        <p className="v2-statement">We measure growth by what a business keeps.</p>
+        <p className="v2-statement">We measure growth by what a business keeps. <span className="v2-statement-sub">We call it your Keep Rate.</span></p>
         <div className="s-read ss-body v2-read">
-          <p>So the business spends more to find new strangers, while the people who already know it, trust it and asked about it sit untouched. The cause is rarely the sales team. It’s infrastructure: nothing in the business is built to hold a buyer between “interested” and “ready”.</p>
+          <p>So the business spends more to find new strangers, while the people who already know it, trust it and asked about it go cold in a list nobody’s working. The cause is rarely the sales team, and it isn’t a discipline problem. It’s infrastructure: nothing in the business is built to hold a buyer between “interested” and “ready”.</p>
         </div>
       </div>
     </div></section>
@@ -66,8 +66,8 @@ export function V2Diagnosis({ n = '02' }: { n?: string }) {
 export function V2Build({ n = '03', diagram = true }: { n?: string; diagram?: boolean }) {
   const rows: [IconName, string, string, string?][] = [
     ['target', 'Acquisition.', 'A front end that brings in the right people: the message, the funnel and the path from first click to booked call.'],
-    ['repeat', 'Conversion.', "Fast, consistent follow-up that turns this week’s enquiries into booked, qualified calls."],
-    ['growth', 'Recovery.', 'The buyers already sitting in your list, from last month or last year, brought back to the table without new ad spend.', 'Where we usually start'],
+    ['repeat', 'Conversion.', 'Fast, consistent follow-up that reaches this week’s enquiries while they’re still warm and turns them into booked, qualified calls.'],
+    ['growth', 'Recovery.', 'The buyers already sitting in your list, the ones who said “not now”, went quiet, or got a quote nobody chased, brought back to the table without new ad spend.', 'Where we usually start'],
     ['users', 'Retention.', 'Clients who stay, buy again and send people your way.']
   ];
   return (
@@ -78,10 +78,10 @@ export function V2Build({ n = '03', diagram = true }: { n?: string; diagram?: bo
           <h2 className="s-h2 v2-h">Four stages of revenue.<br />We start <Em>where the leak is&nbsp;biggest.</Em></h2>
           <p className="ss-body-lg v2-after">Revenue moves through all four. Most businesses only ever invest in the first. The fastest return is usually further down.</p>
         </div>
-        <div className="s-rows v2-rows">{rows.map(([i, t, d, tag], n) => (
+        <div className="s-rows v2-rows">{rows.map(([i, t, d, tag], k) => (
           <div className="s-row" key={t}>
             <div className="s-row-body">
-              <div className="s-row-meta"><span className="ss-label s-stage">Stage {n + 1}</span>{tag ? <span className="ss-label s-tag">{tag}</span> : null}</div>
+              <div className="s-row-meta"><span className="ss-label s-stage">Stage {k + 1}</span>{tag ? <span className="ss-label s-tag">{tag}</span> : null}</div>
               <h3 className="ss-h3" style={{ margin: 0 }}>{t}</h3>
               <p className="ss-body" style={{ margin: 0, color: 'var(--text-secondary)' }}>{d}</p>
             </div>
@@ -102,27 +102,29 @@ export function V2How({ n = '04', theme = 'forest' }: { n?: string; theme?: 'for
           <SecIndex n={n}>How we work</SecIndex>
           <h2 className="s-h2" style={{ marginTop: 0 }}>Diagnose. Install. <Em>Hand over.</Em></h2>
           <div className="s-steps"><FeatureCards items={[
-            { label: 'First', icon: 'search', title: 'Diagnose.', text: "We map how revenue moves through your business today, from first enquiry to repeat client. Before we build anything, you’ll know where the biggest constraint sits and what we’d fix first." },
-            { label: 'Then', icon: 'layers', title: 'Install.', text: 'We engineer the system inside your business, around your offer and in your voice. Your team keeps working while we build.' },
-            { label: 'Finally', icon: 'switch', title: 'Hand over.', text: 'We train your people, document every part, and hand you the controls. We stay on for 30 days after handover, until your team is running it without us.' }
+            { label: 'First', icon: 'search', title: 'Diagnose.', text: 'We find where your biggest constraint sits before we build anything.' },
+            { label: 'Then', icon: 'layers', title: 'Install.', text: 'We build the system inside your business, in your voice, and run it until it’s producing booked calls.' },
+            { label: 'Finally', icon: 'switch', title: 'Hand over.', text: 'We train your team, hand you the controls, and stay on for 30 days.' }
           ]} /></div>
           <div className="s-keep">
             <span className="s-tile"><Icon name="lock" size={20} /></span>
-            <div><strong className="ss-h3">You keep what we build.</strong><p className="ss-body">It lives in your accounts, with your data.</p></div>
+            <div><strong className="ss-h3">You keep what we build.</strong><p className="ss-body">It lives in your accounts, with your data. No lock-in, and no retainer to keep the lights on once it’s yours.</p></div>
           </div>
+          <div className="s-ctas"><Button variant="ghost" href="/approach">See the full approach →</Button></div>
         </div></div>
       </div>
     </section>
   );
 }
 
-export function V2Fit({ n = '06' }: { n?: string }) {
-  const good = ['You sell a premium service or programme, and buyers usually take a call before they commit.', "You have a list of past leads, enquiries or clients that you’ve paid to build.", 'Revenue is consistent, but growth still runs through you.', 'You want a system you keep.'];
-  const not = ["You’re still finding your offer or your first clients.", "You’re looking for cheap leads or a quick campaign.", "You’d rather not look at the numbers."];
+export function V2Fit({ n = '05' }: { n?: string }) {
+  const good = ['You sell a premium service or programme, and buyers usually take a call before they commit.', 'You have a list of past leads, enquiries or clients that you’ve paid to build, and you know it isn’t being worked.', 'You’ve had strong months, but revenue still comes in waves, and growth still runs through you.', 'You want a system you keep.'];
+  const not = ['You’re still finding your offer or your first clients.', 'You’re looking for cheap leads or a quick campaign.', 'You only want more traffic and a monthly report.', 'You’d rather not look at the numbers.'];
   return (
     <section className="s-sec"><div className="s-wrap s-center">
       <SecIndex n={n}>Who it’s for</SecIndex>
       <h2 className="s-h2" style={{ marginTop: 0, maxWidth: 900 }}>Built for founder-led businesses that have <Em>proven their model.</Em></h2>
+      <p className="ss-body-lg s-lede">You’re good at what you do, and your clients get results. What’s missing isn’t talent. It’s a system that holds on to the people who were interested.</p>
       <div className="s-fit">
         <div><h3 className="ss-h3" style={{ margin: 0 }}>A good fit if:</h3><ul className="s-list ss-body">{good.map((g) => <li key={g}><Icon name="check" size={20} /><span>{g}</span></li>)}</ul></div>
         <div><h3 className="ss-h3" style={{ margin: 0, color: 'var(--text-secondary)' }}>Not a fit if:</h3><ul className="s-list s-list-not ss-body">{not.map((g) => <li key={g}><Icon name="close" size={20} /><span>{g}</span></li>)}</ul></div>
@@ -131,7 +133,7 @@ export function V2Fit({ n = '06' }: { n?: string }) {
   );
 }
 
-export function V2Founder({ n = '07' }: { n?: string }) {
+export function V2Founder({ n = '06' }: { n?: string }) {
   return (
     <section className="s-sec s-sunk"><div className="s-wrap">
       <SecIndex n={n}>The founder</SecIndex>
@@ -139,8 +141,8 @@ export function V2Founder({ n = '07' }: { n?: string }) {
         <div className="s-portrait"><span className="ss-label">Portrait — 4:5, professional</span></div>
         <div className="s-founder-text">
           <h2 className="s-h2" style={{ marginTop: 0 }}>Built by <Em>a closer.</Em></h2>
-          <p className="ss-body">Kyū spent six years on sales floors, taking <strong><Ph>[[X,XXX+]]</Ph></strong> calls and closing <strong><Ph>[[$X]]</Ph></strong> in high-ticket deals for B2B and B2C businesses, and watching five-figure buyers slip through the follow-up gap.</p>
-          <p className="ss-body">Before that, he helped grow a youth-services company to £800,000 a year (nearly $1 million) on government contracts, then lost it, because it ran on talent instead of systems. System Switch is the infrastructure both of those businesses needed.</p>
+          <p className="ss-body">Kyū spent six years on sales floors, taking <strong><Ph>[[X,XXX+]]</Ph></strong> calls and closing <strong><Ph>[[<Cur />X]]</Ph></strong> in high-ticket deals for B2B and B2C businesses, and watching five-figure buyers slip through the follow-up gap.</p>
+          <p className="ss-body">Before that, he helped grow a youth-services company to £800,000 a year (nearly $1 million), then lost it, because it ran on one person’s effort instead of systems. Those two lessons are what System Switch is built on: go back for the buyers you’ve earned, and build it so it runs without you.</p>
           <Button variant="ghost" href="/about">Read the story →</Button>
         </div>
       </div>
@@ -148,7 +150,7 @@ export function V2Founder({ n = '07' }: { n?: string }) {
   );
 }
 
-export function V2Faq({ n = '08' }: { n?: string }) {
+export function V2Faq({ n = '07' }: { n?: string }) {
   return (
     <section className="s-sec"><div className="s-wrap">
       <SecIndex n={n}>Before you book</SecIndex>
@@ -157,18 +159,18 @@ export function V2Faq({ n = '08' }: { n?: string }) {
           <h2 className="s-h2 s-faq-h" style={{ marginTop: 0 }}>What to expect from <Em>a systems audit.</Em></h2>
         </div>
         <Faq items={[
-          ['What happens in a systems audit?', "A 30-minute call about how revenue moves through your business: where enquiries come from, what happens to the ones who don’t buy straight away, and how follow-up works today. You’ll leave knowing where the biggest constraint sits and what we’d fix first."],
+          ['What happens in a systems audit?', 'A 20-minute call about how revenue moves through your business: where enquiries come from, what happens to the ones who don’t buy straight away, and how follow-up works today. You’ll leave knowing where the biggest constraint sits and what we’d fix first.'],
+          ['What do I get afterwards?', 'Your Recovery Brief, within 48 hours. One page: your estimated Keep Rate and what the Not-Yet Gap is worth, which group of past leads to reopen first, the first message to send them, and the one change that would recover the most. It’s yours whether we work together or not, and it’s easy to share with a partner or your team.'],
           ['Does it cost anything?', 'No. The systems audit is free.'],
-          ['What do I need to have in place?', "A proven offer, a list of past leads, enquiries or clients, and a rough idea of last month’s numbers. If you use a CRM, have it open on the call."],
-          ['What happens after the audit?', "If we can help, we’ll come back with what we’d build first and what it would take. If we can’t, we’ll tell you on the call, and point you somewhere better if we know of somewhere."],
-          ['Do you work with businesses outside the UK?', 'Yes. We work with founder-led businesses in the UK, the US, Canada and Australia.']
+          ['My old leads are probably dead. Is there any point?', 'Fewer than you’d think. Plenty of people who said “not now” six months ago are ready today, and nobody has asked them. The audit shows you roughly how many, using your own numbers.'],
+          ['I’ve worked with agencies before. Why is this different?', 'We don’t start by selling you more leads. We look at what you already have, build the system inside your business, and run it until it’s producing booked calls. Then we hand it to your team, so you’re never locked into paying us to keep it running. If we can’t help, we’ll say so on the call.']
         ]} />
       </div>
     </div></section>
   );
 }
 
-// Proof slot: the best numbers and a named quote, from lib/work.ts. Placeholders until real results are in.
+// Results: hidden at launch. Not rendered on the homepage until real results replace the placeholders.
 export function V2Proof({ n = '05' }: { n?: string }) {
   const c = CASE_STUDIES[0];
   return (

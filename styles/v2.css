@@ -195,3 +195,11 @@ body:has(.s-v2) .s-head[data-scrolled] { background: var(--bg-canvas); border-bo
 .v2-h-wide { max-width: 1040px; margin-bottom: var(--space-12); }
 .v2-offset { align-items: start; }
 @media (max-width: 900px) { .v2-offset > div:first-child { display: none; } .v2-h-wide { margin-bottom: var(--space-8); } }
+
+/* Keep Rate readout and the calculator's closing call to action. */
+.v2-calc-keep { margin: 0; display: grid; justify-items: center; gap: var(--space-2); }
+.v2-calc-keep .ss-label { color: var(--text-secondary); }
+.v2-calc-keep strong { font: 600 clamp(48px, 5vw, 72px)/1 var(--font-sans); letter-spacing: -.04em; font-variant-numeric: tabular-nums; color: var(--text-primary); }
+.v2-calc-out .v2-calc-big { margin-top: var(--space-6); }
+.v2-calc-cap { margin: 0; color: var(--text-secondary); }
+.v2-calc-cta { margin: var(--space-6) 0 0; padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); max-width: 560px; font: 500 16px/1.5 var(--font-sans); text-wrap: balance; }

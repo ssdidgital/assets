@@ -26,8 +26,8 @@ export function SiteHeader() {
 export type BandKey = 'home' | 'approach' | 'who';
 
 const BANDS: Record<BandKey, [ReactNode, ReactNode]> = {
-  home: [<>Every business has <Em>one constraint</Em> holding the rest back.</>, <>Tell us about your business. If we can help, we’ll show you where to start.<br />If we can’t, we’ll say so.</>],
-  approach: [<>Start with <Em>a systems audit.</Em></>, "Tell us where your business is and where you want it to go. We’ll tell you honestly whether we can help, and where we’d start."],
+  home: [<>Every business has <Em>one constraint</Em> holding the rest back.</>, <>Tell us about your business. If we can help, we’ll show you where to start. If we can’t, we’ll say so.<br />Either way, your Recovery Brief arrives within 48 hours of the call.</>],
+  approach: [<>Start with <Em>a systems audit.</Em></>, "Tell us where your business is and where you want it to go. We’ll tell you honestly whether we can help, and where we’d start. Either way, you get your Recovery Brief within 48 hours of the call."],
   who: [<>Sound like <Em>your business?</Em></>, "Tell us where things stand. If we’re a fit, we’ll show you where we’d start."]
 };
 
@@ -48,8 +48,9 @@ type FootLink = [kind: 'go' | 'a', href: string, label: string];
 
 export function SiteFooter() {
   const cols: [string, FootLink[]][] = [
-    ['Company', [['go', '/approach', 'Approach'], ['go', '/about', 'About'], ['go', '/work', 'Work'], ['go', '/digest', 'Digest']]],
-    ['Legal', [['go', '/company', 'System Switch'], ['go', '/privacy', 'Privacy policy'], ['go', '/terms', 'Terms and conditions']]]
+    ['Company', [['go', '/approach', 'Approach'], ['go', '/who-we-work-with', 'Who we work with'], ['go', '/about', 'About'], ['go', '/start', 'Book a systems audit']]],
+    ['Legal', [['go', '/company', 'System Switch'], ['go', '/privacy', 'Privacy policy'], ['go', '/terms', 'Terms and conditions']]],
+    ['Contact', [['a', 'mailto:support@systemswitch.digital', 'support@systemswitch.digital'], ['a', '#', 'LinkedIn']]]
   ];
   return (
     <footer data-theme="forest" className="s-foot">
@@ -57,7 +58,7 @@ export function SiteFooter() {
         <div className="s-foot-top">
           <div className="s-foot-brand">
             <img src="/logo-wordmark-white.svg" alt="System Switch" />
-            <p className="ss-body-sm">Growth infrastructure for founder-led businesses.</p>
+            <p className="ss-body-sm">Sales infrastructure for founder-led businesses.</p>
           </div>
           <div className="s-foot-cols">{cols.map(([h, items]) => (
             <nav key={h} aria-label={h}>

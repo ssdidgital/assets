@@ -58,3 +58,9 @@ h1, h2, h3, .ss-h3, .s-faq-i button > span:first-child { text-wrap: balance; }
 .s-hero-act { display: block; margin-top: 6px; }
 /* The hero eyebrow stays on one line on phones. */
 @media (max-width: 767px) { .s-hero .s-eyebrow { white-space: nowrap; font-size: 10px; letter-spacing: .12em; padding: 7px 10px; } }
+
+/* Hero: the offer line above the buttons. */
+.s-hero-offer { display: inline-flex; align-items: center; gap: var(--space-3); margin: var(--space-8) 0 0; font: 500 16px/1.4 var(--font-sans); color: var(--text-primary); text-wrap: balance; }
+.s-hero-offer + .s-ctas { margin-top: var(--space-6); }
+@media (max-width: 767px) { .s-hero-offer { font-size: 15px; align-items: baseline; text-align: left; } }
+.v2-statement-sub { display: block; margin-top: 8px; color: var(--accent-text); }

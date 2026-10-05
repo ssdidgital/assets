@@ -1,6 +1,6 @@
 /** Sticky "What happens next" panel; the current step reads in ink. Hidden below 1000px. */
 export function NextPanel({ step }: { step: 0 | 1 }) {
-  const rows = ['Tell us about your business', 'Choose a time', "We’ll show you where we’d start"];
+  const rows = ['Tell us about your business', 'Choose a time', 'Get your Recovery Brief within 48 hours of the call'];
   return (
     <aside className="s-next">
       <span className="ss-label">What happens next</span>

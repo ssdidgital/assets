@@ -3,20 +3,22 @@
 export type Currency = 'GBP' | 'USD';
 export type LeakInputs = { enquiries: number; closeRate: number; laterElsewhere: number; value: number; currency: Currency };
 
-// Defaults reproduce the static illustration: 25% now, 45% waiting, 30% bought elsewhere.
-export const LEAK_DEFAULTS: LeakInputs = { enquiries: 40, closeRate: 25, laterElsewhere: 40, value: 6000, currency: 'GBP' };
+// Conservative defaults: 20 enquiries a month, 20% buy straight away, 10% of the rest buy later elsewhere, a client worth 3,000.
+export const LEAK_DEFAULTS: LeakInputs = { enquiries: 20, closeRate: 20, laterElsewhere: 10, value: 3000, currency: 'GBP' };
 
 export function leak(i: LeakInputs) {
   const now = i.closeRate / 100;
   const lost = (1 - now) * (i.laterElsewhere / 100);
   const wait = 1 - now - lost;
   const monthly = i.enquiries * lost * i.value;
-  return { now, wait, lost, monthly, yearly: monthly * 12 };
+  // Keep Rate: of the people who enquired and went on to buy, the share who bought from you.
+  const keepRate = now + lost > 0 ? now / (now + lost) : 1;
+  return { now, wait, lost, monthly, yearly: monthly * 12, keepRate };
 }
 
 export function money(n: number, c: Currency) {
   // Round to a sensible precision so the figure reads as an estimate, not an invoice.
-  const step = n >= 100000 ? 1000 : n >= 10000 ? 500 : 100;
+  const step = n >= 1000000 ? 1000 : 100;
   return new Intl.NumberFormat(c === 'GBP' ? 'en-GB' : 'en-US', { style: 'currency', currency: c, maximumFractionDigits: 0 }).format(Math.round(n / step) * step);
 }
 
